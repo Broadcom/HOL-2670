@@ -1,0 +1,375 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: False
+  vars_files:
+    - environment.yml
+  tasks:
+    - name: tag edge1-mgmt
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: edge1-mgmt
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Mgmt_WLD"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag edge2-mgmt
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: edge2-mgmt
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Mgmt_WLD"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag edge1-wld
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: edge1-wld
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "VI_WLD1"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag edge2-wld
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: edge2-wld
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "VI_WLD1"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag auto
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: auto
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag idm
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: idm
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag lcm
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: lcm
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag logs
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: logs
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag ops
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: ops
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag ops-cp
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: ops-cp
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag nsx-mgmt-1
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: nsx-mgmt-1
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Mgmt_WLD"
+          - scope: "Zone"
+            tag: "VI_WLD1"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag sddc-manager
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: sddc-manager
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "SDDC"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag vcenter-mgmt
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: vcenter-mgmt
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "vCenter"
+          - scope: "Zone"
+            tag: "Mgmt_WLD"
+          - scope: "Zone"
+            tag: "VI_WLD1"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag corp-web-01
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: corp-web-01
+        remove_other_tags: False
+        add_tags:
+          - scope: "App-Name"
+            tag: "Corp-App"
+          - scope: "App-Tier"
+            tag: "Web"
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+    - name: tag corp-web-02
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: corp-web-02
+        remove_other_tags: False
+        add_tags:
+          - scope: "App-Name"
+            tag: "Corp-App"
+          - scope: "App-Tier"
+            tag: "Web"
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+    - name: tag corp-app-01
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: corp-app-01
+        remove_other_tags: False
+        add_tags:
+          - scope: "App-Name"
+            tag: "Corp-App"
+          - scope: "App-Tier"
+            tag: "App"
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+    - name: tag corp-db-01
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: corp-db-01
+        remove_other_tags: False
+        add_tags:
+          - scope: "App-Name"
+            tag: "Corp-App"
+          - scope: "App-Tier"
+            tag: "DB"
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+    - name: tag fin-web-01
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: fin-web-01
+        remove_other_tags: False
+        add_tags:
+          - scope: "App-Name"
+            tag: "Fin-App"
+          - scope: "App-Tier"
+            tag: "Web"
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+    - name: tag fin-app-01
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: fin-app-01
+        remove_other_tags: False
+        add_tags:
+          - scope: "App-Name"
+            tag: "Fin-App"
+          - scope: "App-Tier"
+            tag: "App"
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+    - name: tag fin-db-01
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: fin-db-01
+        remove_other_tags: False
+        add_tags:
+          - scope: "App-Name"
+            tag: "Fin-App"
+          - scope: "App-Tier"
+            tag: "DB"
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+    - name: tag hr-web-01
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: hr-web-01
+        remove_other_tags: False
+        add_tags:
+          - scope: "App-Name"
+            tag: "HR-App"
+          - scope: "App-Tier"
+            tag: "Web"
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+    - name: tag hr-app-01
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: hr-app-01
+        remove_other_tags: False
+        add_tags:
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+    - name: tag hr-db-01
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: hr-db-01
+        remove_other_tags: False
+        add_tags:
+          - scope: "Environment"
+            tag: "Demo"
+          - scope: "OS-Type"
+            tag: "Linux"
+
+    - name: tag lab-tools
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: lab-tools
+        remove_other_tags: False
+        add_tags:
+          - scope: "Environment"
+            tag: "VCF"
+          - scope: "OS-Type"
+            tag: "Linux"
+          - scope: "Zone"
+            tag: "Tools"
+          - scope: "Zone"
+            tag: "InfraSvc"
+    - name: tag client-vm
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: client-vm
+        remove_other_tags: False
+        add_tags:
+          - scope: "Environment"
+            tag: "Client"
+          - scope: "OS-Type"
+            tag: "Windows"

@@ -1,0 +1,186 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: False
+  vars_files:
+    - environment.yml
+  tasks:
+    - name: Create VCF Zone Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: VCF_Zone
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "Zone|VCF"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+      delegate_to: localhost
+
+    - name: Create SDDC Zone Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: SDDC_Zone
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "Zone|SDDC"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+      delegate_to: localhost
+
+    - name: Create Mgmt WLD Zone Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: Mgmt_WLD_Zone
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "Zone|Mgmt_WLD"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - conjunction_operator: "OR"
+            resource_type: "ConjunctionOperator"
+          - ip_addresses: ["10.0.0.101", "10.0.0.102", "10.0.0.103", "10.0.0.104", "10.0.0.110", "10.0.0.111", "10.0.0.112"]
+            resource_type: "IPAddressExpression"
+      delegate_to: localhost
+
+    - name: Create VI WLD1 Zone Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: VI_WLD1_Zone
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "Zone|VI_WLD1"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - conjunction_operator: "OR"
+            resource_type: "ConjunctionOperator"
+          - ip_addresses: ["10.0.0.110", "10.0.0.111", "10.0.0.112"]
+            resource_type: "IPAddressExpression"
+      delegate_to: localhost
+
+    - name: Create Aria Zone Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: Aria_Zone
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "Zone|Aria"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+      delegate_to: localhost
+        
+    - name: Create Tools Zone Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: Tools_Zone
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "Zone|Tools"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - conjunction_operator: "OR"
+            resource_type: "ConjunctionOperator"
+          - ip_addresses: ["10.0.0.2", "10.0.0.11"]
+            resource_type: "IPAddressExpression"
+      delegate_to: localhost
+
+    - name: Create InfraSvc Zone Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: InfraSvc_Zone
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "Zone|InfraSvc"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - conjunction_operator: "OR"
+            resource_type: "ConjunctionOperator"
+          - ip_addresses: ["10.0.0.2", "10.0.0.11", "10.0.0.221"]
+            resource_type: "IPAddressExpression"
+      delegate_to: localhost
+    
+    - name: Create vCenter Zone Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: vCenter_Zone
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "Zone|vCenter"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+      delegate_to: localhost
+
+    - name: Create Main Console Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: MainConsole
+        state: "present"
+        domain_id: "default"
+        expression:
+          - ip_addresses: ["10.0.0.2"]
+            resource_type: "IPAddressExpression"
+      delegate_to: localhost
+    
+    - name: Create Manager Console Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: Manager
+        state: "present"
+        domain_id: "default"
+        expression:
+          - ip_addresses: ["10.0.0.11"]
+            resource_type: "IPAddressExpression"
+      delegate_to: localhost
