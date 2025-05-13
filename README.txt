@@ -7,7 +7,7 @@ This file can be updated and will be copied to the console desktop at startup.
 NOTE: this file is public so NEVER include passwords.
 
 * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - *
-*                       HOL-2670 Title of Your Lab                              *
+*                       HOL-2670 ENTER THE TITLE OF YOUR LAB                              *
 * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - *
 
 Primary benefits of your lab.
