@@ -1,3 +1,5 @@
+Hey Quinton Update Me in GIT!
+
 THIS IS AN EXAMPLE. REPLACE THIS WITH YOUR OWN README.txt using the pattern below.
 
 This is customer facing so please make it look professional. Thanks.
@@ -7,7 +9,7 @@ This file can be updated and will be copied to the console desktop at startup.
 NOTE: this file is public so NEVER include passwords.
 
 * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - *
-*                       HOL-26XX Title of Your Lab                              *
+*                       HOL-2670 ENTER THE TITLE OF YOUR LAB                              *
 * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - *
 
 Primary benefits of your lab.
