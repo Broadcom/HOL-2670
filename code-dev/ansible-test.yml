@@ -5,13 +5,13 @@
     vars_files:
       - environment.yml
     vars:
-      lab-pw: "{{ lookup('file', '/home/holuser/creds.txt')}}"
+      lab_pw: "{{ lookup('file', '/home/holuser/creds.txt')}}"
     tasks:
       - name: Get VM Names
         community.vmware.vmware_vm_info:
           hostname: '{{ vc_mgmt_hostname }}'
           username: '{{ vc_mgmt_username }}'
-          password: '{{ lab-pw }}'
+          password: '{{ lab_pw }}'
           validate_certs: no
         delegate_to: localhost
         register: vm_info
