@@ -1,7 +1,5 @@
 ---
-    lab-pw: "{{ lookup('file', '/home/holuser/creds.txt')}}"
-
-    #MGMT vCenter related variables.
+     #MGMT vCenter related variables.
     vc_mgmt_display_name : "vc-mgmt-a"
     vc_mgmt_hostname: "vc-mgmt-a.site-a.vcf.lab"
     vc_mgmt_username: "administrator@vsphere.local"
