@@ -4,6 +4,8 @@
     become: no
     vars_files:
       - environment.yml
+    vars:
+      lab-pw: "{{ lookup('file', '/home/holuser/creds.txt')}}"
     tasks:
       - name: Get VM Names
         community.vmware.vmware_vm_info:
