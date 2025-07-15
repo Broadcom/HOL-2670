@@ -19,4 +19,5 @@
       - name: Identify SSP VMs 
         set_fact:
           ssp_vms: "{{ vm_info.virtual_machines  | selectattr('guest_name', 'match', 'ssp*') | map(attribute='guest_name') }}"
-      
+        debug:
+          msg: "{{ ssp_vms }}"
