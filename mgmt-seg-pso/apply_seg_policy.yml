@@ -4,4 +4,4 @@
   vars_files:
     - NSXT_Variables.yml
   tasks:
-    - include ./vm_tags/main.yaml
+    - include_tasks: ./vm_tags/main.yaml
