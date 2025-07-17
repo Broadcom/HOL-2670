@@ -8,4 +8,4 @@
     - include_tasks: ./sec_groups/main.yaml
     - include_tasks: ./service_groups/main.yaml
     - include_tasks: ./policy_rules/main.yaml
-    - include_tasks: ./contex_profile/main.yaml
+    - include_tasks: ./contex_profiles/main.yaml
