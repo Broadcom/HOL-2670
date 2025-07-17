@@ -1,7 +1,7 @@
 ---
 
 - name: Update Security Policy
-  nsxt_policy_security_policy:
+  vmware.ansible_for_nsxt.nsxt_policy_security_policy:
     hostname: "{{ NSXT_CREDENTIALS.node }}"
     username: "{{ NSXT_CREDENTIALS.username }}"
     password: "{{ NSXT_CREDENTIALS.password }}"
