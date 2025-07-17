@@ -14,4 +14,4 @@ NSXT_CREDENTIALS:
   username: "admin"
   password: "{{ lab_pw }}"
 
-STATE: absent
+STATE: present
