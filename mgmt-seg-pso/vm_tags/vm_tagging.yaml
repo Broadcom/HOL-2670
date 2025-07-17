@@ -2,7 +2,7 @@
 
 
 - name: Set VM Tag
-  nsxt_vm_tags:
+  vmware.ansible_for_nsxt.nsxt_vm_tags:
     hostname: "{{ NSXT_CREDENTIALS.node }}"
     username: "{{ NSXT_CREDENTIALS.username }}"
     password: "{{ NSXT_CREDENTIALS.password }}"
