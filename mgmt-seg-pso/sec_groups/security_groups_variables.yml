@@ -33,10 +33,16 @@ sec_groups:
       value: wld|W01
   id: VCF01
 - display_name: VCF01_MGMT
-  expression: []
+  expression:
+  - resource_type: PathExpression
+    paths:
+    - /infra/segments/vmmgmt-vds01-mgmt-01a
   id: VCF01_MGMT
 - display_name: ARIA_SUITE
-  expression: []
+  expression:
+  - resource_type: PathExpression
+    paths:
+    - /infra/segments/vmmgmt-vds01-mgmt-01a
   id: ARIA_SUITE
 - display_name: ARIA_SUITE_SNAT
   expression:
@@ -86,7 +92,10 @@ sec_groups:
       value: wld|M01
   id: SDDC
 - display_name: VCF01_SSP
-  expression: []
+  expression:
+  - resource_type: PathExpression
+    paths:
+    - /infra/segments/ans-vds01-mgmt-01a
   id: VCF01_SSP
 - display_name: M01_VC
   expression:

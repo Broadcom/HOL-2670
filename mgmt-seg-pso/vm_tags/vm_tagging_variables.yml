@@ -131,4 +131,29 @@ vm_tags:
     tag: MGMT
   - scope: wld
     tag: W01
-
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
+- vmname: null
+  tags: []
