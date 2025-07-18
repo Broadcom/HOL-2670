@@ -19,7 +19,7 @@ Firewall:
     logged: true
     scope:
     - ANY
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 10
     display_name: VCF01 to NTP Servers
     id: VCF01_to_NTP_Servers
@@ -34,7 +34,7 @@ Firewall:
     logged: true
     scope:
     - ANY
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 20
     display_name: VCF01 to DHCP Servers
     id: VCF01_to_DHCP_Servers
@@ -49,7 +49,7 @@ Firewall:
     logged: true
     scope:
     - ANY
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 70
     display_name: VCF01 to Active Directory
     id: VCF01_to_Active_Directory
@@ -64,7 +64,7 @@ Firewall:
     logged: true
     scope:
     - ANY
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 80
     display_name: Active Directory to VCF01
     id: Active_Directory_to_VCF01
@@ -79,7 +79,7 @@ Firewall:
     logged: true
     scope:
     - ANY
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 30
     display_name: VCF to Backup Servers
     id: VCF_to_Backup_Servers
@@ -94,7 +94,7 @@ Firewall:
     logged: true
     scope:
     - ANY
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 40
     display_name: Backup Servers to VCF01
     id: Backup_Servers_to_VCF01
@@ -109,7 +109,7 @@ Firewall:
     logged: true
     scope:
     - ANY
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 50
     display_name: TOOLS to VCF01
     id: TOOLS_to_VCF01
@@ -124,7 +124,7 @@ Firewall:
     logged: true
     scope:
     - ANY
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 60
     display_name: VCF01 to Vmware Depot
     id: VCF01_to_Vmware_Depot
@@ -141,7 +141,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/VCF01
-    disabled: 'False'
+    disabled: 'True'
   category: Infrastructure
   scope:
   - ANY
@@ -164,7 +164,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/VCF01
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 10
     display_name: VCF HTTPS_SSH Traffic
     id: VCF_HTTPS_SSH_Traffic
@@ -183,7 +183,7 @@ Firewall:
     - /infra/domains/default/groups/VCF01_MGMT
     - /infra/domains/default/groups/M01_WLD
     - /infra/domains/default/groups/W01_WLD
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 20
     display_name: VCF SDDC MGMT to VCF WLD
     id: VCF_SDDC_MGMT_to_VCF_WLD
@@ -201,7 +201,7 @@ Firewall:
     - /infra/domains/default/groups/SDDC
     - /infra/domains/default/groups/M01_WLD
     - /infra/domains/default/groups/W01_WLD
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 30
     display_name: VCF vCenter ELM
     id: VCF_vCenter_ELM
@@ -219,7 +219,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/ELM_VC
     - /infra/domains/default/groups/SDDC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 40
     display_name: VCF vCenter RDU
     id: VCF_vCenter_RDU
@@ -234,7 +234,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/VCF01_MGMT
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 50
     display_name: VCF01_MGMT to Any
     id: VCF01_MGMT_to_Any
@@ -251,7 +251,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/VCF01_MGMT
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 60
     display_name: Insecure Protocols
     id: Insecure_Protocols
@@ -269,7 +269,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/VCF01
-    disabled: 'False'
+    disabled: 'True'
   category: Environment
   scope:
   - ANY
@@ -293,7 +293,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/ARIA_SUITE
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 20
     display_name: ARIA_SUITE to Any
     id: ARIA_SUITE_to_Any
@@ -309,7 +309,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/VCF01
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 10
     display_name: VCF WLD to ARIA_SUITE
     id: VCF_WLD_to_ARIA_SUITE
@@ -324,7 +324,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/VCF01
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 30
     display_name: ARIA_SUITE DROP
     id: ARIA_SUITE_DROP
@@ -339,7 +339,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/ARIA_SUITE
-    disabled: 'False'
+    disabled: 'True'
   category: Environment
   scope:
   - ANY
@@ -363,7 +363,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/VCF01_SSP
     - /infra/domains/default/groups/M01_VC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 10
     display_name: SSP to NSX
     id: SSP_to_NSX
@@ -378,7 +378,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_SSP
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 20
     display_name: SSPI to SSP
     id: SSPI_to_SSP
@@ -394,7 +394,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/M01_SSPI
     - /infra/domains/default/groups/M01_SSP
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 30
     display_name: SSP to SSPI Registry
     id: SSP_to_SSPI_Registry
@@ -410,7 +410,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/M01_SSP
     - /infra/domains/default/groups/M01_SSPI
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 40
     display_name: VCF MGMT to SSP
     id: VCF_MGMT_to_SSP
@@ -428,7 +428,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_SSP
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 50
     display_name: SSP to NDR and MPS
     id: SSP_to_NDR_and_MPS
@@ -443,7 +443,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_SSP
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 60
     display_name: SSP to SIEM
     id: SSP_to_SIEM
@@ -458,7 +458,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_SSP
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 70
     display_name: SSP to SSP
     id: SSP_to_SSP
@@ -473,7 +473,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_SSP
-    disabled: 'False'
+    disabled: 'True'
   category: Environment
   scope:
   - ANY
@@ -497,7 +497,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/W01_SSP
     - /infra/domains/default/groups/W01_NSX
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 10
     display_name: SSPI to SSP
     id: SSPI_to_SSP
@@ -513,7 +513,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/W01_SSPI
     - /infra/domains/default/groups/W01_SSP
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 20
     display_name: SSP to SSPI Registry
     id: SSP_to_SSPI_Registry
@@ -529,7 +529,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/W01_SSP
     - /infra/domains/default/groups/W01_SSPI
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 30
     display_name: VCF MGMT to SSP
     id: VCF_MGMT_to_SSP
@@ -548,7 +548,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/W01_SSP
     - /infra/domains/default/groups/W01_NSX
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 40
     display_name: SSP to NDR and MPS
     id: SSP_to_NDR_and_MPS
@@ -563,7 +563,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_SSP
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 50
     display_name: SSP to SIEM
     id: SSP_to_SIEM
@@ -578,7 +578,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_SSP
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 60
     display_name: SSP to SSP
     id: SSP_to_SSP
@@ -593,7 +593,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_SSP
-    disabled: 'False'
+    disabled: 'True'
   category: Environment
   scope:
   - ANY
@@ -616,7 +616,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_VC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 30
     display_name: 'vCenter to ESXi '
     id: vCenter_to_ESXi_
@@ -631,7 +631,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_VC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 40
     display_name: ESXi to vCenter
     id: ESXi_to_vCenter
@@ -646,7 +646,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_VC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 60
     display_name: Avi to NSX
     id: Avi_to_NSX
@@ -661,7 +661,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 70
     display_name: Avi to vCenter
     id: Avi_to_vCenter
@@ -677,7 +677,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/M01_AVI_CTL
     - /infra/domains/default/groups/M01_VC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 80
     display_name: Avi SE to Avi CTL
     id: Avi_SE_to_Avi_CTL
@@ -692,7 +692,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 90
     display_name: Avi CTL to Avi SE
     id: Avi_CTL_to_Avi_SE
@@ -707,7 +707,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 100
     display_name: Avi CTL to Avi CTL
     id: Avi_CTL_to_Avi_CTL
@@ -722,7 +722,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 110
     display_name: Avi CTL to Cloud Services
     id: Avi_CTL_to_Cloud_Services
@@ -739,7 +739,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 50
     display_name: Management Domain Drop
     id: Management_Domain_Drop
@@ -754,7 +754,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_WLD
-    disabled: 'False'
+    disabled: 'True'
   category: Application
   scope:
   - ANY
@@ -777,7 +777,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/M01_NSX
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 10
     display_name: NSX to vCenter
     id: NSX_to_vCenter
@@ -793,7 +793,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/W01_NSX
     - /infra/domains/default/groups/W01_VC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 20
     display_name: NSX Resource to NSX Resource
     id: NSX_Resource_to_NSX_Resource
@@ -812,7 +812,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_NSX
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 30
     display_name: 'vCenter to ESXi '
     id: vCenter_to_ESXi_
@@ -827,7 +827,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_VC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 40
     display_name: ESXi to vCenter
     id: ESXi_to_vCenter
@@ -842,7 +842,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_VC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 60
     display_name: Avi to NSX
     id: Avi_to_NSX
@@ -858,7 +858,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/W01_AVI_CTL
     - /infra/domains/default/groups/W01_NSX
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 70
     display_name: Avi to vCenter
     id: Avi_to_vCenter
@@ -874,7 +874,7 @@ Firewall:
     scope:
     - /infra/domains/default/groups/W01_AVI_CTL
     - /infra/domains/default/groups/W01_VC
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 80
     display_name: Avi SE to Avi CTL
     id: Avi_SE_to_Avi_CTL
@@ -889,7 +889,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_AVI_CTL
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 90
     display_name: Avi CTL to Avi SE
     id: Avi_CTL_to_Avi_SE
@@ -904,7 +904,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_AVI_CTL
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 100
     display_name: Avi CTL to Avi CTL
     id: Avi_CTL_to_Avi_CTL
@@ -919,7 +919,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_AVI_CTL
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 110
     display_name: Avi CTL to Cloud Services
     id: Avi_CTL_to_Cloud_Services
@@ -936,7 +936,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_AVI_CTL
-    disabled: 'False'
+    disabled: 'True'
   - sequence_number: 50
     display_name: Management Domain Drop
     id: Management_Domain_Drop
@@ -951,7 +951,7 @@ Firewall:
     logged: true
     scope:
     - /infra/domains/default/groups/W01_WLD
-    disabled: 'False'
+    disabled: 'True'
   category: Application
   scope:
   - ANY
