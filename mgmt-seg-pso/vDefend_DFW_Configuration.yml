@@ -44,19 +44,19 @@
           include_tasks:
             file: ./policy_rules/main.yaml
 
-#      # Security Groups
-#        - name: vDefend DFW Configuration | Initiate Security Group Deletion
-#          include_tasks:
-#            file: ./sec_groups/main.yaml
-#
-#      # Service Groups
-#        - name: vDefend DFW Configuration | Initiate Service Group Deletion
-#          include_tasks:
-#            file: ./service_groups/main.yaml
-#
-#      # Context Profiles
-#        - name: vDefend DFW Configuration | Initiate Context Profiles Deletion
-#          include_tasks:
-#            file: ./context_profiles/main.yaml
+      # Security Groups
+        - name: vDefend DFW Configuration | Initiate Security Group Deletion
+          include_tasks:
+            file: ./sec_groups/main.yaml
+
+      # Service Groups
+        - name: vDefend DFW Configuration | Initiate Service Group Deletion
+          include_tasks:
+            file: ./service_groups/main.yaml
+
+      # Context Profiles
+        - name: vDefend DFW Configuration | Initiate Context Profiles Deletion
+          include_tasks:
+            file: ./context_profiles/main.yaml
 
     when: STATE == "absent"
