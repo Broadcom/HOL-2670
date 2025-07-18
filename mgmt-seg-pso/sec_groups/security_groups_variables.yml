@@ -36,13 +36,13 @@ sec_groups:
   expression:
   - resource_type: PathExpression
     paths:
-    - /infra/segments/vds01-mgmt-01a.vmmgmt-vds01-mgmt-01a
+    - /infra/segments/19ae5083-b0fe-4bd6-834d-811753679242:dvportgroup-26
   id: VCF01_MGMT
 - display_name: ARIA_SUITE
   expression:
   - resource_type: PathExpression
     paths:
-    - /infra/segments/vds01-mgmt-01a.vmmgmt-vds01-mgmt-01a
+    - /infra/segments/19ae5083-b0fe-4bd6-834d-811753679242:dvportgroup-26
   id: ARIA_SUITE
 - display_name: ARIA_SUITE_SNAT
   expression:
@@ -95,7 +95,7 @@ sec_groups:
   expression:
   - resource_type: PathExpression
     paths:
-    - /infra/segments/vds01-mgmt-01a.ans-vds01-mgmt-01a
+    - /infra/segments/19ae5083-b0fe-4bd6-834d-811753679242:dvportgroup-2003
   id: VCF01_SSP
 - display_name: M01_VC
   expression:
