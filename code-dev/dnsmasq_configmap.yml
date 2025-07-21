@@ -1,0 +1,165 @@
+metadata:
+  name: dnsmasq
+apiVersion: v1
+data:
+  hosts: |-
+    127.0.0.1 localhost dnsmasq
+  dnsmasq.conf: |-
+    expand-hosts
+kind: ConfigMap
+
+metadata:
+  name: dnsmasq
+apiVersion: v1
+kind: ConfigMap
+data:
+  dnsmasq.conf: |-
+    expand-hosts
+    dhcp-range=set:vlan100,10.1.0.100,10.1.0.120,255.255.255.0,24h
+    dhcp-option=tag:vlan100,option:router,10.1.0.1
+    dhcp-option=tag:vlan100,option:dns-server,10.1.0.1
+    dhcp-option=tag:vlan100,option:ntp-server,10.1.0.1
+    dhcp-range=set:vlan10,10.1.1.220,10.1.1.239,255.255.255.0,24h
+    dhcp-option=tag:vlan10,option:router,10.1.1.1
+    dhcp-option=tag:vlan10,option:dns-server,10.1.1.1
+    dhcp-option=tag:vlan10,option:ntp-server,10.1.1.1
+    dhcp-range=set:vlan14,10.1.3.130,10.1.3.200,255.255.255.128,24h
+    dhcp-option=tag:vlan14,option:router,10.1.3.129
+    dhcp-option=tag:vlan14,option:dns-server,10.1.3.129
+    dhcp-option=tag:vlan14,option:ntp-server,10.1.3.129
+    dhcp-authoritative
+    expand-hosts
+    domain=site-a.vcf.lab,10.1.1.0/20
+    server=8.8.8.8
+  hosts: |-
+    127.0.0.1 localhost dnsmasq
+    10.1.1.1 router.site-a.vcf.lab
+    10.1.10.129 router.site-a.vcf.lab
+    10.1.1.1 proxy.site-a.vcf.lab
+    10.1.10.131 manager.site-a.vcf.lab
+    10.1.10.130 console.site-a.vcf.lab
+    10.1.1.3 stg-01a.site-a.vcf.lab
+    10.1.2.200 stg-01a.site-a.vcf.lab
+    10.1.4.200 stg-01a.site-a.vcf.lab
+    10.1.1.5 sddcmanager-a.site-a.vcf.lab
+    10.1.1.20 nsx-mgmt-a.site-a.vcf.lab
+    10.1.1.21 nsx-mgmt-01a.site-a.vcf.lab
+    10.1.1.22 nsx-mgmt-02a.site-a.vcf.lab
+    10.1.1.23 nsx-mgmt-03a.site-a.vcf.lab
+    10.1.1.180 edge-mgmt-01a.site-a.vcf.lab
+    10.1.1.181 edge-mgmt-02a.site-a.vcf.lab
+    10.1.1.10 vc-mgmt-a.site-a.vcf.lab
+    10.1.1.11 vc-wld01-a.site-a.vcf.lab
+    10.1.1.25 nsx-wld01-a.site-a.vcf.lab
+    10.1.1.26 nsx-wld01-01a.site-a.vcf.lab
+    10.1.1.27 nsx-wld01-02a.site-a.vcf.lab
+    10.1.1.28 nsx-wld01-03a.site-a.vcf.lab
+    10.1.1.182 edge-wld01-01a.site-a.vcf.lab
+    10.1.1.183 edge-wld01-02a.site-a.vcf.lab
+    10.1.1.12 vc-wld02-a.site-a.vcf.lab
+    10.1.1.75 nsx-wld02-a.site-a.vcf.lab
+    10.1.1.76 nsx-wld02-01a.site-a.vcf.lab
+    10.1.1.77 nsx-wld02-02a.site-a.vcf.lab
+    10.1.1.78 nsx-wld02-03a.site-a.vcf.lab
+    10.1.1.184 edge-wld02-01a.site-a.vcf.lab
+    10.1.1.185 edge-wld02-02a.site-a.vcf.lab
+    10.1.1.80 nsx-shared-a.site-a.vcf.lab
+    10.1.1.81 nsx-shared-01a.site-a.vcf.lab
+    10.1.1.82 nsx-shared-02a.site-a.vcf.lab
+    10.1.1.83 nsx-shared-03a.site-a.vcf.lab
+    10.1.1.186 edge-shared-01a.site-a.vcf.lab
+    10.1.1.187 edge-shared-02a.site-a.vcf.lab
+    10.1.1.70 auto-a.site-a.vcf.lab
+    10.1.1.28 o11n-01a.site-a.vcf.lab
+    10.1.1.29 o11n-02a.site-a.vcf.lab
+    10.1.1.30 ops-a.site-a.vcf.lab
+    10.1.1.31 ops-01a.site-a.vcf.lab
+    10.1.1.32 ops-02a.site-a.vcf.lab
+    10.1.1.34 opsdata-01a.site-a.vcf.lab
+    10.1.1.35 opsproxy-01a.site-a.vcf.lab
+    10.1.1.36 opslcm-a.site-a.vcf.lab
+    10.1.1.40 opsmgmt-a.site-a.vcf.lab
+    10.1.1.41 opscollector-01a.site-a.vcf.lab
+    10.1.1.45 opslogs-a.site-a.vcf.lab
+    10.1.1.46 opslogs-01a.site-a.vcf.lab
+    10.1.1.47 opslogs-02a.site-a.vcf.lab
+    10.1.1.48 opslogs-03a.site-a.vcf.lab
+    10.1.10.250 vcfinstaller-a.site-a.vcf.lab
+    10.1.1.50 vidm-a.site-a.vcf.lab
+    10.1.1.51 vidm-01a.site-a.vcf.lab
+    10.1.1.55 vidb-01a.site-a.vcf.lab
+    10.1.1.56 vidb-02a.site-a.vcf.lab
+    10.1.1.57 vidb-03a.site-a.vcf.lab
+    10.1.1.60 opsnet-a.site-a.vcf.lab
+    10.1.1.61 opsnet-01a.site-a.vcf.lab
+    10.1.1.62 opsnetcollector-01a.site-a.vcf.lab
+    10.1.1.85 supervisor.site-a.vcf.lab
+    10.1.1.86 sup-01a.site-a.vcf.lab
+    10.1.1.87 sup-02a.site-a.vcf.lab
+    10.1.1.88 sup-03a.site-a.vcf.lab
+    10.1.1.89 SUP upgrade IP.site-a.vcf.lab
+    10.1.1.90 alb-a.site-a.vcf.lab
+    10.1.1.91 alb-01a.site-a.vcf.lab
+    10.1.1.92 alb-02a.site-a.vcf.lab
+    10.1.1.93 alb-03a.site-a.vcf.lab
+    10.1.1.94 albse-01a.site-a.vcf.lab
+    10.1.1.95 albse-02a.site-a.vcf.lab
+    10.1.1.96 albse-03a.site-a.vcf.lab
+    10.1.1.97 dsm-01a.site-a.vcf.lab
+    10.1.1.98 vlsr-01a.site-a.vcf.lab
+    10.1.1.99 vlsr-rep-01a.site-a.vcf.lab
+    10.1.1.100 vlcr-01a.site-a.vcf.lab
+    10.1.1.63 hcx-mgmt-01a.site-a.vcf.lab
+    10.1.1.64 hcx-ix-01a.site-a.vcf.lab
+    10.1.1.65 hcx-ix-02a.site-a.vcf.lab
+    10.1.1.66 hcx-ne-01a.site-a.vcf.lab
+    10.1.1.67 hcx-ne-02a.site-a.vcf.lab
+    10.1.1.68 hcx-wo-01-a.site-a.vcf.lab
+    10.1.5.130 edge-tep01-mgmt-01a.site-a.vcf.lab
+    10.1.5.131 edge-tep02-mgmt-01a.site-a.vcf.lab
+    10.1.5.132 edge-tep01-mgmt-02a.site-a.vcf.lab
+    10.1.5.133 edge-tep02-mgmt-02a.site-a.vcf.lab
+    10.1.5.134 edge-tep01-wld01-01a.site-a.vcf.lab
+    10.1.5.135 edge-tep02-wld01-01a.site-a.vcf.lab
+    10.1.5.136 edge-tep01-wld01-02a.site-a.vcf.lab
+    10.1.5.137 edge-tep02-wld01-02a.site-a.vcf.lab
+    10.1.5.138 edge-tep01-wld02-01a.site-a.vcf.lab
+    10.1.5.139 edge-tep02-wld02-01a.site-a.vcf.lab
+    10.1.5.140 edge-tep01-wld02-02a.site-a.vcf.lab
+    10.1.5.141 edge-tep02-wld02-02a.site-a.vcf.lab
+    10.1.5.142 edge-tep01-shared-01a.site-a.vcf.lab
+    10.1.5.143 edge-tep02-shared-01a.site-a.vcf.lab
+    10.1.5.144 edge-tep01-shared-02a.site-a.vcf.lab
+    10.1.5.145 edge-tep02-shared-02a.site-a.vcf.lab
+    10.1.6.2 edge-uplink01-mgmt-01a.site-a.vcf.lab
+    10.1.6.3 edge-uplink01-mgmt-02a.site-a.vcf.lab
+    10.1.6.130 edge-uplink02-mgmt-01a.site-a.vcf.lab
+    10.1.6.131 edge-uplink02-mgmt-02a.site-a.vcf.lab
+    10.1.6.6 edge-uplink01-wld01-01a.site-a.vcf.lab
+    10.1.6.7 edge-uplink01-wld01-02a.site-a.vcf.lab
+    10.1.6.134 edge-uplink02-wld01-01a.site-a.vcf.lab
+    10.1.6.135 edge-uplink02-wld01-02a.site-a.vcf.lab
+    10.1.6.10 edge-uplink01-wld02-01a.site-a.vcf.lab
+    10.1.6.11 edge-uplink01-wld02-02a.site-a.vcf.lab
+    10.1.6.138 edge-uplink02-wld02-01a.site-a.vcf.lab
+    10.1.6.139 edge-uplink02-wld02-02a.site-a.vcf.lab
+    10.1.6.14 edge-uplink01-shared-01a.site-a.vcf.lab
+    10.1.6.15 edge-uplink01-shared-02a.site-a.vcf.lab
+    10.1.6.142 edge-uplink02-shared-01a.site-a.vcf.lab
+    10.1.6.143 edge-uplink02-shared-02a.site-a.vcf.lab
+    10.1.1.101 esx-01a.site-a.vcf.lab
+    10.1.1.131 vsan-fs-01a.site-a.vcf.lab
+    10.1.1.102 esx-02a.site-a.vcf.lab
+    10.1.1.132 vsan-fs-02a.site-a.vcf.lab
+    10.1.1.103 esx-03a.site-a.vcf.lab
+    10.1.1.133 vsan-fs-03a.site-a.vcf.lab
+    10.1.1.104 esx-04a.site-a.vcf.lab
+    10.1.1.134 vsan-fs-04a.site-a.vcf.lab
+    10.1.1.105 esx-05a.site-a.vcf.lab
+    10.1.1.135 vsan-fs-05a.site-a.vcf.lab
+    10.1.1.106 esx-06a.site-a.vcf.lab
+    10.1.1.136 vsan-fs-06a.site-a.vcf.lab
+    10.1.1.107 esx-07a.site-a.vcf.lab
+    10.1.1.137 vsan-fs-07a.site-a.vcf.lab
+    10.1.1.200 sspi.site-a.vcf.lab
+    

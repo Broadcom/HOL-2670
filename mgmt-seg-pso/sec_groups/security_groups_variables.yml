@@ -1,0 +1,524 @@
+sec_groups:
+- display_name: VCF01
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|M01
+  - conjunction_operator: OR
+    resource_type: ConjunctionOperator
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|W01
+  id: VCF01
+- display_name: VCF01_MGMT
+  expression:
+  - resource_type: PathExpression
+    paths:
+    - /infra/segments/19ae5083-b0fe-4bd6-834d-811753679242:dvportgroup-26
+  id: VCF01_MGMT
+- display_name: ARIA_SUITE
+  expression:
+  - resource_type: PathExpression
+    paths:
+    - /infra/segments/19ae5083-b0fe-4bd6-834d-811753679242:dvportgroup-26
+  id: ARIA_SUITE
+- display_name: ARIA_SUITE_SNAT
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: ARIA_SUITE_SNAT
+- display_name: M01_WLD
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|M01
+  id: M01_WLD
+- display_name: SDDC
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|SDDC
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|M01
+  id: SDDC
+- display_name: VCF01_SSP
+  expression:
+  - resource_type: PathExpression
+    paths:
+    - /infra/segments/19ae5083-b0fe-4bd6-834d-811753679242:dvportgroup-2003
+  id: VCF01_SSP
+- display_name: M01_VC
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|VCSA
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|M01
+  id: M01_VC
+- display_name: M01_NSX
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|NSX
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|M01
+  id: M01_NSX
+- display_name: M01_SSPI
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|SSPI
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|M01
+  id: M01_SSPI
+- display_name: M01_HOSTS
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.101
+    - 10.1.1.102
+    - 10.1.1.103
+    - 10.1.1.104
+  id: M01_HOSTS
+- display_name: M01_EDGES
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.180
+    - 10.1.1.181
+  id: M01_EDGES
+- display_name: M01_SVM
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: M01_SVM
+- display_name: M01_SSPM
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: M01_SSPM
+- display_name: M01_SSP
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|SSP
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|M01
+  id: M01_SSP
+- display_name: ELM_VC
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|ELM_VCSA
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|M01
+  id: ELM_VC
+- display_name: W01_WLD
+  expression:
+  - key: Tag
+    member_type: VirtualMachine
+    operator: EQUALS
+    resource_type: Condition
+    value: wld|W01
+  id: W01_WLD
+- display_name: W01_STORAGE
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: W01_STORAGE
+- display_name: W01_VC
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|VCSA
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|W01
+  id: W01_VC
+- display_name: W01_NSX
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|NSX
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|W01
+  id: W01_NSX
+- display_name: W01_SSPI
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|SSPI
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|W01
+  id: W01_SSPI
+- display_name: W01_HOSTS
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.105
+    - 10.1.1.106
+    - 10.1.1.107
+    - 10.1.1.108
+  id: W01_HOSTS
+- display_name: W01_EDGES
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|NSX_Edge
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|W01
+  - conjunction_operator: OR
+    resource_type: ConjunctionOperator
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.184
+    - 10.1.1.185
+  id: W01_EDGES
+- display_name: W01_SVM
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: W01_SVM
+- display_name: W01_SSPM
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: W01_SSPM
+- display_name: W01_SSP
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|SSP
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|W01
+  id: W01_SSP
+- display_name: BASTION
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.10.130
+    - 10.1.10.131
+  id: BASTION
+- display_name: INFRA_SVC
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.164
+  id: INFRA_SVC
+- display_name: TOOLS
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.164
+  id: TOOLS
+- display_name: AD_SVC
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: AD_SVC
+- display_name: BACKUP_SERVERS
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: BACKUP_SERVERS
+- display_name: DNS_SVC
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.1
+  id: DNS_SVC
+- display_name: NTP_SVC
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.1
+    - 10.1.10.129
+  id: NTP_SVC
+- display_name: DHCP_SVC
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.1
+  id: DHCP_SVC
+- display_name: SIEM_SVC
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 10.1.1.45
+  id: SIEM_SVC
+- display_name: M01_AVI_CTL
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|AVI_CTL
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|M01
+  id: M01_AVI_CTL
+- display_name: M01_AVI_SE
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: M01_AVI_SE
+- display_name: W01_AVI_CTL
+  expression:
+  - resource_type: NestedExpression
+    expressions:
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: application|AVI_CTL
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: zone|MGMT
+    - conjunction_operator: AND
+      resource_type: ConjunctionOperator
+    - key: Tag
+      member_type: VirtualMachine
+      operator: EQUALS
+      resource_type: Condition
+      value: wld|W01
+  id: W01_AVI_CTL
+- display_name: W01_AVI_SE
+  expression:
+  - resource_type: IPAddressExpression
+    ip_addresses:
+    - 1.1.1.1
+  id: W01_AVI_SE

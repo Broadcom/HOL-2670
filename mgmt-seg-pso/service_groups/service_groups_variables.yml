@@ -1,0 +1,324 @@
+serv_groups:
+- display_name: BASTION_Jump_Server
+  service_entries:
+  - display_name: ICMP Echo Reply
+    nested_service_path: /infra/services/ICMP_Echo_Reply
+    resource_type: NestedServiceServiceEntry
+  - display_name: ICMP Echo Request
+    nested_service_path: /infra/services/ICMP_Echo_Request
+    resource_type: NestedServiceServiceEntry
+  - display_name: HTTPS
+    nested_service_path: /infra/services/HTTPS
+    resource_type: NestedServiceServiceEntry
+  - display_name: SSH
+    nested_service_path: /infra/services/SSH
+    resource_type: NestedServiceServiceEntry
+  - display_name: RDP
+    nested_service_path: /infra/services/RDP
+    resource_type: NestedServiceServiceEntry
+  id: BASTION_Jump_Server
+- display_name: MGMT_INFRA_Services
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '53'
+    - '123'
+    - '22'
+    - '21'
+    - '23'
+    - '587'
+  - display_name: UDP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: UDP
+    destination_ports:
+    - '53'
+    - '67'
+  id: MGMT_INFRA_Services
+- display_name: Active_Directory_Services
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '88'
+    - '135'
+    - '389'
+    - '445'
+    - '464'
+    - '636'
+    - '3268'
+    - '3269'
+    - 49152-65535
+  - display_name: UDP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: UDP
+    destination_ports:
+    - '88'
+    - '389'
+  id: Active_Directory_Services
+- display_name: TOOL_Services
+  service_entries:
+  - display_name: ICMP Echo Reply
+    nested_service_path: /infra/services/ICMP_Echo_Reply
+    resource_type: NestedServiceServiceEntry
+  - display_name: ICMP Echo Request
+    nested_service_path: /infra/services/ICMP_Echo_Request
+    resource_type: NestedServiceServiceEntry
+  - display_name: HTTPS
+    nested_service_path: /infra/services/HTTPS
+    resource_type: NestedServiceServiceEntry
+  - display_name: SSH
+    nested_service_path: /infra/services/SSH
+    resource_type: NestedServiceServiceEntry
+  id: TOOL_Services
+- display_name: BACKUP_Services
+  service_entries:
+  - display_name: ICMP Echo Reply
+    nested_service_path: /infra/services/ICMP_Echo_Reply
+    resource_type: NestedServiceServiceEntry
+  - display_name: ICMP Echo Request
+    nested_service_path: /infra/services/ICMP_Echo_Request
+    resource_type: NestedServiceServiceEntry
+  - display_name: FTP
+    nested_service_path: /infra/services/FTP
+    resource_type: NestedServiceServiceEntry
+  - display_name: HTTPS
+    nested_service_path: /infra/services/HTTPS
+    resource_type: NestedServiceServiceEntry
+  - display_name: SSH
+    nested_service_path: /infra/services/SSH
+    resource_type: NestedServiceServiceEntry
+  id: BACKUP_Services
+- display_name: DHCP_Services
+  service_entries:
+  - display_name: DHCP-Client
+    nested_service_path: /infra/services/DHCP-Client
+    resource_type: NestedServiceServiceEntry
+  - display_name: DHCP-Server
+    nested_service_path: /infra/services/DHCP-Server
+    resource_type: NestedServiceServiceEntry
+  id: DHCP_Services
+- display_name: SDDC_Services
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '5480'
+  - display_name: ICMP Echo Reply
+    nested_service_path: /infra/services/ICMP_Echo_Reply
+    resource_type: NestedServiceServiceEntry
+  - display_name: ICMP Echo Request
+    nested_service_path: /infra/services/ICMP_Echo_Request
+    resource_type: NestedServiceServiceEntry
+  id: SDDC_Services
+- display_name: vCenter_ELM
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '2012'
+    - '2020'
+    - '8084'
+  - display_name: HTTPS
+    nested_service_path: /infra/services/HTTPS
+    resource_type: NestedServiceServiceEntry
+  - display_name: LDAP
+    nested_service_path: /infra/services/LDAP
+    resource_type: NestedServiceServiceEntry
+  - display_name: LDAP-over-SSL
+    nested_service_path: /infra/services/LDAP-over-SSL
+    resource_type: NestedServiceServiceEntry
+  - display_name: ICMP ALL
+    nested_service_path: /infra/services/ICMP-ALL
+    resource_type: NestedServiceServiceEntry
+  id: vCenter_ELM
+- display_name: vCenter_RDU
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '5480'
+    - '5432'
+  id: vCenter_RDU
+- display_name: LLMNR
+  service_entries:
+  - display_name: UDP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: UDP
+    destination_ports:
+    - '5355'
+  id: LLMNR
+- display_name: ARIA_Inbound_Services
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '1514'
+    - '6514'
+    - '9000'
+    - '9543'
+    - '1991'
+    - '2025'
+  - display_name: HTTPS
+    nested_service_path: /infra/services/HTTPS
+    resource_type: NestedServiceServiceEntry
+  - display_name: SSH
+    nested_service_path: /infra/services/SSH
+    resource_type: NestedServiceServiceEntry
+  - display_name: Syslog (TCP)
+    nested_service_path: /infra/services/Syslog_(TCP)
+    resource_type: NestedServiceServiceEntry
+  - display_name: Syslog (UDP)
+    nested_service_path: /infra/services/Syslog_(UDP)
+    resource_type: NestedServiceServiceEntry
+  id: ARIA_Inbound_Services
+- display_name: ARIA_Outbound_Services
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '9000'
+    - '9543'
+  - display_name: HTTPS
+    nested_service_path: /infra/services/HTTPS
+    resource_type: NestedServiceServiceEntry
+  - display_name: SSH
+    nested_service_path: /infra/services/SSH
+    resource_type: NestedServiceServiceEntry
+  - display_name: ICMP Echo Reply
+    nested_service_path: /infra/services/ICMP_Echo_Reply
+    resource_type: NestedServiceServiceEntry
+  - display_name: ICMP Echo Request
+    nested_service_path: /infra/services/ICMP_Echo_Request
+    resource_type: NestedServiceServiceEntry
+  - display_name: SNMP
+    nested_service_path: /infra/services/SNMP
+    resource_type: NestedServiceServiceEntry
+  - display_name: Syslog (TCP)
+    nested_service_path: /infra/services/Syslog_(TCP)
+    resource_type: NestedServiceServiceEntry
+  - display_name: Syslog (UDP)
+    nested_service_path: /infra/services/Syslog_(UDP)
+    resource_type: NestedServiceServiceEntry
+  id: ARIA_Outbound_Services
+- display_name: SSPI_Services
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '6443'
+  id: SSPI_Services
+- display_name: SSPM_Services
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '9092'
+  - display_name: HTTPS
+    nested_service_path: /infra/services/HTTPS
+    resource_type: NestedServiceServiceEntry
+  id: SSPM_Services
+- display_name: ESXi_Inbound_Access
+  service_entries:
+  - display_name: Update Manager
+    nested_service_path: /infra/services/Update_Manager
+    resource_type: NestedServiceServiceEntry
+  - display_name: ICMP Echo Reply
+    nested_service_path: /infra/services/ICMP_Echo_Reply
+    resource_type: NestedServiceServiceEntry
+  - display_name: ICMP Echo Request
+    nested_service_path: /infra/services/ICMP_Echo_Request
+    resource_type: NestedServiceServiceEntry
+  id: ESXi_Inbound_Access
+- display_name: ESXi_Outbound_Access
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '6500'
+    - '6501'
+    - '6502'
+    - '7475'
+    - '7476'
+  - display_name: HTTPS
+    nested_service_path: /infra/services/HTTPS
+    resource_type: NestedServiceServiceEntry
+  - display_name: VMware-ESXi5.x-TCP
+    nested_service_path: /infra/services/VMware-ESXi5.x-TCP
+    resource_type: NestedServiceServiceEntry
+  - display_name: VMware-ESXi5.x-UDP
+    nested_service_path: /infra/services/VMware-ESXi5.x-UDP
+    resource_type: NestedServiceServiceEntry
+  - display_name: VMware-UpdateMgr-VUM
+    nested_service_path: /infra/services/VMware-UpdateMgr-VUM
+    resource_type: NestedServiceServiceEntry
+  id: ESXi_Outbound_Access
+- display_name: NSX_Outbound_Access
+  service_entries:
+  - display_name: HTTP
+    nested_service_path: /infra/services/HTTP
+    resource_type: NestedServiceServiceEntry
+  - display_name: Vmware-UpdateMgr-update
+    nested_service_path: /infra/services/Vmware-UpdateMgr-update
+    resource_type: NestedServiceServiceEntry
+  id: NSX_Outbound_Access
+- display_name: NSX_Cluster_Access
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '9000'
+    - '9040'
+  - display_name: ICMP ALL
+    nested_service_path: /infra/services/ICMP-ALL
+    resource_type: NestedServiceServiceEntry
+  id: NSX_Cluster_Access
+- display_name: NSX_Messaging
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '1234'
+    - '1235'
+    - '5671'
+  id: NSX_Messaging
+- display_name: Avi_SE_CTL_Access
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '8443'
+  - display_name: NTP
+    nested_service_path: /infra/services/NTP
+    resource_type: NestedServiceServiceEntry
+  - display_name: SSH
+    nested_service_path: /infra/services/SSH
+    resource_type: NestedServiceServiceEntry
+  id: Avi_SE_CTL_Access
+- display_name: Avi_CTL_Access
+  service_entries:
+  - display_name: TCP
+    resource_type: L4PortSetServiceEntry
+    l4_protocol: TCP
+    destination_ports:
+    - '8443'
+  - display_name: HTTPS
+    nested_service_path: /infra/services/HTTPS
+    resource_type: NestedServiceServiceEntry
+  - display_name: SSH
+    nested_service_path: /infra/services/SSH
+    resource_type: NestedServiceServiceEntry
+  id: Avi_CTL_Access

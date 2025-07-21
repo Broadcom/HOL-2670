@@ -1,0 +1,55 @@
+---
+  - hosts: 127.0.0.1
+    connection: local
+    become: no
+    vars_files:
+      - environment.yml
+    vars:
+      lab-pw: "{{ lookup('file', '/home/holuser/creds.txt')}}"
+    tasks:
+      - name: Get VM Names
+        community.vmware.vmware_vm_info:
+          hostname: '{{ vc_hostname }}'
+          username: '{{ vc_username }}'
+          password: '{{ vc_password }}'
+          validate_certs: no
+        delegate_to: localhost
+        register: vm_info
+      
+      - name: Validate vm_names variable
+        set_fact:
+          l2_vms: "{{ vm_info.virtual_machines | reject('search','vCLS') | selectattr('guest_name', 'defined') | map(attribute='guest_name') }}"
+
+      - name: Identify Powered On VMs 
+        set_fact:
+          powered_on_vms: "{{ vm_info.virtual_machines | reject('search','vCLS') | selectattr('power_state', 'match', 'poweredOn') | map(attribute='guest_name') }}"
+
+      - name: shutdown guest VMs
+        community.vmware.vmware_guest_powerstate:
+          hostname: '{{ vc_hostname }}'
+          username: '{{ vc_username }}'
+          password: '{{ vc_password }}'
+          name: '{{ item }}'
+          validate_certs: no
+          state: shutdown-guest
+          state_change_timeout: 200
+        delegate_to: localhost
+        with_items: '{{ powered_on_vms }}'
+        ignore_errors: yes
+
+      - name: determine which VMs are Still powered On
+        set_fact:
+          still_on_vms: "{{ vm_info.virtual_machines | reject('search','vCLS') | selectattr('power_state', 'match', 'poweredOn') | map(attribute='guest_name') }}"
+      
+      - name: power off remaining VMs
+        community.vmware.vmware_guest_powerstate:
+          hostname: '{{ vc_hostname }}'
+          username: '{{ vc_username }}'
+          password: '{{ vc_password }}'
+          name: '{{ item }}'
+          validate_certs: no
+          state: powered-off
+          state_change_timeout: 200
+        delegate_to: localhost
+        with_items: '{{ still_on_vms }}'
+        ignore_errors: yes

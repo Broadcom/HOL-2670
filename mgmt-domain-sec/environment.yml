@@ -1,0 +1,41 @@
+---
+    #vCenter related variables.
+    vc_display_name : "vcenter-mgmt"
+    vc_hostname: "vcenter-mgmt.vcf.sddc.lab"
+    vc_username: "administrator@vsphere.local"
+    vc_password: "***"
+    vc_datacenter: "mgmt-datacenter-01"
+    vc_mgmt_vds_name: "mgmt-vds01"
+    vc_mgmt_cluster: "mgmt-cluster-01"
+    vc_mgmt_datastore: "vcf-vsan"
+    vc_wld1_vds_name: "mgmt-domain-wld-cluster-01-vds01"
+    vc_wld1_cluster: "wld-cluster-01"
+    vc_wld1_datastore: "wld-cluster-01-vsan01"
+
+    #OVA Related Items
+    ova_path: "/home/holuser/l2vms/"
+    dns_server: "10.0.0.221"
+    ntp_server: "10.0.0.221"
+    search_domain: "vcf.sdd.lab"
+    default_gateway:  "10.0.0.221"
+    mgmt_dpg: "mgmt-domain-wld-cluster-01-vds01-mgmt"
+    edge_hostname1: "edge1-wld"
+    edge_hostname2: "edge2-wld"
+    edge_dpg1: "VCF-edge_EC-02_PG-mgmt-vds01-External-1"
+    edge_dpg2: "VCF-edge_EC-02_PG-mgmt-vds01-External-2"
+    edge_uplink1: "VCF-edge_EC-02_segment_uplink1_11"
+    edge_uplink2: "VCF-edge_EC-02_segment_uplink2_12"
+
+    #NSX-T Related Variables
+    nsxt_hostname: "nsx-mgmt.vcf.sddc.lab"
+    nsxt_username: "admin"
+    nsxt_password: "******"
+    edge_transport_zone_display_name: "VCF-edge_EC-02_uplink-tz"
+    transport_zone_display_name: "mgmt-domain-tz-overlay01"
+    edge_cluster: "EC-02"
+    tier0_display_name: "wld1-t0"
+    tier1_display_name: "3-Tier-T1"
+    edge_uplink_policy1: "VCF-edge_EC-01_uplink1-named-teaming-policy"
+    edge_uplink_policy2: "VCF-edge_EC-01_uplink2-named-teaming-policy"
+
+    #NSX-ALB Related Variables

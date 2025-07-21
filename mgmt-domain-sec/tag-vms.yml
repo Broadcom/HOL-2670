@@ -1,0 +1,185 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: False
+  vars_files:
+    - environment.yml
+  tasks:
+    - name: tag auto
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: auto-a-8fpl5
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag idm
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: idm
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag lcm
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: opslcm-a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag logs
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: vrli-master
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag ops
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: ops-a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag ops-collector
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: opscollector-01a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Aria"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag nsx-mgmt-1
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: nsx-mgmt-01a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Mgmt_WLD"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag nsx-wld-1
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: nsx-wld-01a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "VI_WLD1"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag sddc-manager
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: sddcmanager-a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "SDDC"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag vcenter-mgmt
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: vc-mgmt-a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "vCenter"
+          - scope: "Zone"
+            tag: "Mgmt_WLD"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag vcenter-wld
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: vc-wld01-a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "vCenter"
+          - scope: "Zone"
+            tag: "VI_WLD1"
+          - scope: "Environment"
+            tag: "VCF"
+    - name: tag VM Flowgen
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: vmflowgen-01a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "Tools"
+          - scope: "Environment"
+            tag: "Management"
+    
+    - name: Validate vm_names variable
+        set_fact:
+          ssp_vms: "{{ vm_info.virtual_machines | select('search','ssp') | selectattr('guest_name', 'defined') | map(attribute='guest_name') }}"
+    
+    - name: tag ssp-VMs
+      vmware.ansible_for_nsxt.nsxt_vm_tags:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        virtual_machine_display_name: ssp-installer-01a
+        remove_other_tags: False
+        add_tags:
+          - scope: "Zone"
+            tag: "VI_WLD1"
+          - scope: "Environment"
+            tag: "VCF"

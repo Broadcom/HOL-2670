@@ -1,0 +1,11 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - NSXT_Variables.yml
+  tasks:
+    - include_tasks: ./vm_tags/main.yaml
+    - include_tasks: ./sec_groups/main.yaml
+    - include_tasks: ./service_groups/main.yaml
+    - include_tasks: ./context_profiles/main.yaml
+    - include_tasks: ./policy_rules/main.yaml

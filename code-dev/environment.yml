@@ -1,0 +1,26 @@
+---
+     #MGMT vCenter related variables.
+    vc_mgmt_display_name : "vc-mgmt-a"
+    vc_mgmt_hostname: "vc-mgmt-a.site-a.vcf.lab"
+    vc_mgmt_username: "administrator@vsphere.local"
+    vc_mgmt_datacenter: "dc-a"
+    vc_mgmt_vds_name: "mgmt-vds01"
+    vc_mgmt_cluster: "cluster-mgmt-01a"
+    vc_mgmt_datastore: "vsan-mgmt-01a"
+    
+    #WLD1 vCenter related variables.
+    vc_wld1_display_name : "vc-wld01-a"
+    vc_wld1_hostname: "vc-wld01-a.site-a.vcf.lab"
+    vc_wld1_username: "administrator@wld.sso"
+    vc_wld1_datacenter: "wld-01a-DC"
+    vc_wld1_cluster: "wld-cluster-01"
+    vc_wld1_datastore: "cluster-wld01-vsan01"
+
+    #MGMT NSX Related Variables
+    nsx_mgmt_hostname: "nsx-mgmt-a.site-a.vcf.lab"
+    nsx_mgmt_username: "admin"
+
+    #WLD1 NSX Related Variable
+    nsx_wld1_hostname: "nsx-wld01-a.site-a.vcf.lab"
+    nsx_wld1_username: "admin"
+    

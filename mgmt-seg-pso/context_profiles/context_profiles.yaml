@@ -1,0 +1,14 @@
+---
+
+- name: Update Context Profile
+  vmware.ansible_for_nsxt.nsxt_context_profile:
+    hostname: "{{ NSXT_CREDENTIALS.node }}"
+    username: "{{ NSXT_CREDENTIALS.username }}"
+    password: "{{ NSXT_CREDENTIALS.password }}"
+    validate_certs: False
+    state: "{{ STATE }}"
+    display_name: "{{ CTX.display_name }}"
+    attributes: "{{ CTX.attributes }}"
+
+ 
+

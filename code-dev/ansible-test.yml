@@ -1,0 +1,24 @@
+---
+  - hosts: 127.0.0.1
+    connection: local
+    become: no
+    vars_files:
+      - environment.yml
+    vars:
+      lab_pw: "{{ lookup('file', '/home/holuser/creds.txt')}}"
+    tasks:
+      - name: Get VM Names
+        community.vmware.vmware_vm_info:
+          hostname: '{{ vc_mgmt_hostname }}'
+          username: '{{ vc_mgmt_username }}'
+          password: '{{ lab_pw }}'
+          validate_certs: no
+        delegate_to: localhost
+        register: vm_info
+
+      - name: Identify SSP VMs 
+        set_fact:
+          ssp_vms: "{{ vm_info.virtual_machines  | selectattr('guest_name', 'match', 'ssp*') | map(attribute='guest_name') }}"
+        
+      - debug:
+          msg: "{{ ssp_vms }}"

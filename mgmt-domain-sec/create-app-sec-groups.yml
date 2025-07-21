@@ -1,0 +1,133 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - environment.yml
+  tasks:
+    - name: create Web Tier VM Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: Web-Tier-VMs
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "App-Tier|Web"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+    - name: create App Tier VM Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: App-Tier-VMs
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "App-Tier|App"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+    - name: create DB Tier VM Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: DB-Tier-VMs
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "App-Tier|DB"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+    - name: create Corp App Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: Corp-App-VMs
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "App-Name|Corp-App"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+    - name: create Fin App Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: Fin-App-VMs
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "App-Name|Fin-App"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+    - name: create HR App Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: HR-App-VMs
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "App-Name|HR-App"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+    - name: create Linux VM Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: Linux-VMs
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "OS-Type|Linux"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - conjunction_operator: "OR"
+            resource_type: "ConjunctionOperator"
+          - member_type: "SegmentPort"
+            value: "OS-Type|Linux"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+    - name: create Demo Group
+      vmware.ansible_for_nsxt.nsxt_policy_group:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: Demo-Environment-VMs
+        state: "present"
+        domain_id: "default"
+        expression:
+          - member_type: "VirtualMachine"
+            value: "Environment|Demo"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"

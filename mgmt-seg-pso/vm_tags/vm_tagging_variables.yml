@@ -1,0 +1,133 @@
+vm_tags:
+- vmname: sddcmanager-a
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: SDDC
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: M01
+- vmname: ops-a
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: ARIA
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: M01
+- vmname: opscollector-01a
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: ARIA
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: M01
+- vmname: opslcm-a
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: ARIA
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: M01
+- vmname: auto-a-8fpl5
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: ARIA
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: M01
+- vmname: vrli-master
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: ARIA
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: M01
+- vmname: vc-mgmt-a
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: VCSA
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: M01
+- vmname: nsx-mgmt-01a
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: NSX
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: M01
+- vmname: ssp-installer-01a
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: SSP
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: W01
+- vmname: vc-wld01-a
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: VCSA
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: W01
+- vmname: nsx-wld01-01a
+  tags:
+  - scope: tier
+    tag: APP
+  - scope: environemnt
+    tag: PROD
+  - scope: application
+    tag: NSX
+  - scope: zone
+    tag: MGMT
+  - scope: wld
+    tag: W01

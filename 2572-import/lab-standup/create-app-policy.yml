@@ -1,0 +1,154 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - environment.yml
+  tasks:
+    - name: Create Manager Access
+      vmware.ansible_for_nsxt.nsxt_policy_security_policy:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: "Manager"
+        state: "present"
+        domain_id: "default"
+        locked: False
+        category: "Infrastructure"
+        sequence_number: 100
+        rules:
+        - action: "ALLOW"
+          disabled: false
+          description: "Allow Manager Access"
+          sequence_number: 100
+          display_name: "Manager-Absolute-Access"
+          direction: "IN_OUT"
+          source_groups: ["/infra/domains/default/groups/Manager"]
+          destination_groups: ["ANY"]
+          services: ["ANY"]
+          notes: "Isolate the corporate application so it does not talk to other apps"
+          ip_protocol: IPV4
+    
+    - name: Set Demo Enviornment Policy 
+      vmware.ansible_for_nsxt.nsxt_policy_security_policy:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: "Demo-Environment-Rules"
+        state: "present"
+        domain_id: "default"
+        locked: False
+        category: "Environment"
+        rules:
+        - action: "ALLOW"
+          disabled: true
+          description: "Allow HTTPS to access VMs in the Web Tier Group"
+          sequence_number: 10
+          display_name: "HTTPS-to-Web-Tier"
+          source_groups: ["ANY"]
+          destination_groups: ["/infra/domains/default/groups/Web-Tier-VMs"]
+          services: ["/infra/services/HTTPS"]
+          notes: "Allow HTTP Access to Web Tier"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/Web-Tier-VMs"
+        - action: "REJECT"
+          disabled: true
+          description: "Block Communication from this environment to other environments."
+          sequence_number: 1000
+          display_name: "Isolate-Demo-Env"
+          destinations_excluded: true
+          direction: "IN_OUT"
+          source_groups: ["/infra/domains/default/groups/Demo-Environment-VMs"]
+          destination_groups: ["/infra/domains/default/groups/Demo-Environment-VMs"]
+          services: ["ANY"]
+          notes: "Restrict access outside of the Demo Environment"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/Demo-Environment-VMs"
+
+    - name: App Isolation Policy
+      vmware.ansible_for_nsxt.nsxt_policy_security_policy:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: "Application-Isolation"
+        state: "present"
+        domain_id: "default"
+        locked: False
+        category: "Application"
+        sequence_number: 100
+        rules:
+        - action: "DROP"
+          disabled: true
+          description: "Isolate the Corp App"
+          sequence_number: 100
+          display_name: "Corp-App-Isolation"
+          destinations_excluded: true
+          direction: "IN_OUT"
+          source_groups: ["/infra/domains/default/groups/Corp-App-VMs"]
+          destination_groups: ["/infra/domains/default/groups/Corp-App-VMs"]
+          services: ["ANY"]
+          notes: "Isolate the corporate application so it does not talk to other apps"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/Corp-App-VMs"
+        - action: "DROP"
+          disabled: true
+          description: "Isolate the HR App"
+          sequence_number: 100
+          display_name: "HR-App-Isolation"
+          destinations_excluded: true
+          direction: "IN_OUT"
+          source_groups: ["/infra/domains/default/groups/HR-App-VMs"]
+          destination_groups: ["/infra/domains/default/groups/HR-App-VMs"]
+          services: ["ANY"]
+          notes: "Isolate the HR application so it does not talk to other apps"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/HR-App-VMs"
+    - name: Set 3 Tier App Segmentation Policy 
+      vmware.ansible_for_nsxt.nsxt_policy_security_policy:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: "3-Tier-App-Policy"
+        state: "present"
+        domain_id: "default"
+        locked: False
+        category: "Application"
+        sequence_number: 1000
+        rules:
+        - action: "ALLOW"
+          disabled: true
+          description: "Allow Port 8080/8443 Only To App Tier"
+          sequence_number: 10
+          display_name: "Web-to-App-Tier"
+          source_groups: ["/infra/domains/default/groups/Web-Tier-VMs"]
+          destination_groups: ["/infra/domains/default/groups/App-Tier-VMs"]
+          services: ["/infra/services/Oracle_XMLDB_HTTP_port"]
+          service_entries:
+            - l4_protocol: "TCP"
+              destination_ports: ["8443"]
+              resource_type: "L4PortSetServiceEntry"
+          notes: "Restrict Access to the App tier so that only Web Tier can access over port 8080"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/Demo-Environment-VMs"
+        - action: "ALLOW"
+          disabled: true
+          description: "Allow Port 3306 Only To DB Tier"
+          sequence_number: 20
+          display_name: "App-to-DB-Tier"
+          source_groups: ["/infra/domains/default/groups/App-Tier-VMs"]
+          destination_groups: ["/infra/domains/default/groups/DB-Tier-VMs"]
+          services: ["/infra/services/MySQL", "/infra/services/HTTP"]
+          notes: "Restrict Access to DB tier so only App tier can access over port 3306"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/Demo-Environment-VMs"
+      
+    

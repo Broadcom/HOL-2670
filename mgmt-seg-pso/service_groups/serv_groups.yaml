@@ -1,0 +1,11 @@
+---
+
+- name: Update Service Group
+  vmware.ansible_for_nsxt.nsxt_security_services:
+    hostname: "{{ NSXT_CREDENTIALS.node }}"
+    username: "{{ NSXT_CREDENTIALS.username }}"
+    password: "{{ NSXT_CREDENTIALS.password }}"
+    validate_certs: false
+    display_name: "{{ SERV.display_name }}"
+    state: "{{ STATE }}"
+    service_entries: "{{ SERV.service_entries }}"

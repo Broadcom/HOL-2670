@@ -1,0 +1,60 @@
+---
+  - hosts: 127.0.0.1
+    connection: local
+    become: no
+    vars_files:
+      - environment.yml
+    vars:
+      host_names: []
+    tasks:
+      - name: Get Cluster Information
+        community.vmware.vmware_cluster_info:
+          hostname: '{{ vchostname }}'
+          username: '{{ vcusername }}'
+          password: '{{ vcpassword }}'
+          datacenter: '{{ vcdatacenter }}'
+          validate_certs: no
+          schema: vsphere
+          properties:
+            - name
+        delegate_to: localhost
+        register: cluster_info
+      
+      - name: Get Host Names
+        set_fact:
+          cluster_names: "{{ cluster_info.clusters | community.general.json_query('*.name')}}"
+      
+      - name: Get Cluster Information
+        community.vmware.vmware_cluster_info:
+          hostname: '{{ vchostname }}'
+          username: '{{ vcusername }}'
+          password: '{{ vcpassword }}'
+          datacenter: '{{ vcdatacenter }}'
+          validate_certs: no
+        delegate_to: localhost
+        register: cluster_info_2
+
+      - name: Get Host Details 
+        set_fact:
+          host_detail: "{{ cluster_info_2.clusters | community.general.json_query('*.hosts') }}"
+
+      - name: Get Host Names
+        set_fact:
+          host_names: "{{ host_names }} +   [ '{{ item | community.general.json_query(query) }}' ]"
+        with_items: '{{ host_detail }}'
+        vars:
+          query: "name"
+
+      - name: Power Down ESXi Hosts
+        community.vmware.vmware_host_powerstate:
+          hostname: '{{ vchostname }}'
+          username: '{{ vcusername }}'
+          password: '{{ vcpassword }}'
+          esxi_hostname: '{{ item }}'
+          state: shutdown-host
+          force: yes
+          validate_certs: no
+        delegate_to: localhost
+        register: host_data
+        with_items: '{{ host_names }}'
+        ignore_errors: yes

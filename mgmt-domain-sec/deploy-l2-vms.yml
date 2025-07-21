@@ -1,0 +1,166 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: False
+  vars_files:
+    - environment.yml
+  tasks:
+    - name: deploy corp-web-01
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: corp-web-01
+        networks:
+          'dvportgroup-14013': 'vDefend-Web-LS' 
+        power_on: yes
+        ovf: '{{ ova_path }}corp-web-01/corp-web-01.ovf'
+        validate_certs: no
+      delegate_to: localhost
+
+    - name: deploy corp-web-02
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: corp-web-02
+        networks:
+          'dvportgroup-14013': 'vDefend-Web-LS' 
+        power_on: yes
+        ovf: '{{ ova_path }}corp-web-02/corp-web-02.ovf'
+        validate_certs: no
+      delegate_to: localhost
+
+    - name: deploy corp-app-01
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: corp-app-01
+        networks:
+          'dvportgroup-14011': 'vDefend-App-LS' 
+        power_on: yes
+        ovf: '{{ ova_path }}corp-app-01/corp-app-01.ovf'
+        validate_certs: no
+      delegate_to: localhost
+
+    - name: deploy corp-db-01
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: corp-db-01
+        networks:
+          'dvportgroup-14012': 'vDefend-DB-LS'
+        power_on: yes
+        ovf: '{{ ova_path }}corp-db-01/corp-db-01.ovf'
+        validate_certs: no
+      delegate_to: localhost
+    
+    - name: deploy fin-web-01
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: fin-web-01
+        networks:
+          'dvportgroup-14013': 'vDefend-Web-LS' 
+        power_on: yes
+        ovf: '{{ ova_path }}fin-web-01/fin-web-01.ovf'
+        validate_certs: no
+      delegate_to: localhost
+
+    - name: deploy fin-app-01
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: fin-app-01
+        networks:
+          'dvportgroup-14011': 'vDefend-App-LS' 
+        power_on: yes
+        ovf: '{{ ova_path }}fin-app-01/fin-app-01.ovf'
+        validate_certs: no
+      delegate_to: localhost
+
+    - name: deploy fin-db-01
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: fin-db-01
+        networks:
+          'dvportgroup-14012': 'vDefend-DB-LS'
+        power_on: yes
+        ovf: '{{ ova_path }}fin-db-01/fin-db-01.ovf'
+        validate_certs: no
+      delegate_to: localhost
+    
+    - name: deploy hr-web-01
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: hr-web-01
+        networks:
+          'dvportgroup-14013': 'vDefend-Web-LS' 
+        power_on: yes
+        ovf: '{{ ova_path }}hr-web-01/hr-web-01.ovf'
+        validate_certs: no
+      delegate_to: localhost
+
+    - name: deploy hr-app-01
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: hr-app-01
+        networks:
+          'dvportgroup-14011': 'vDefend-App-LS' 
+        power_on: yes
+        ovf: '{{ ova_path }}hr-app-01/hr-app-01.ovf'
+        validate_certs: no
+      delegate_to: localhost
+      
+    - name: deploy hr-db-01
+      community.vmware.vmware_deploy_ovf:
+        hostname: '{{ vc_hostname }}'
+        username: '{{ vc_username }}'
+        password: '{{ vc_password }}'
+        datacenter: '{{ vc_datacenter }}'
+        cluster: '{{ vc_wld1_cluster }}'
+        datastore: '{{ vc_wld1_datastore }}'
+        name: hr-db-01
+        networks:
+          'dvportgroup-14012': 'vDefend-DB-LS'
+        power_on: yes
+        ovf: '{{ ova_path }}hr-db-01/hr-db-01.ovf'
+        validate_certs: no
+      delegate_to: localhost

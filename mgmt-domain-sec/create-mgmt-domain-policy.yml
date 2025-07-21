@@ -1,0 +1,250 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - environment.yml
+  tasks:
+    - name: Create VCF Infrastructure Security Policy
+      vmware.ansible_for_nsxt.nsxt_policy_security_policy:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: "VCF-Infra-Sec-Policy"
+        state: "present"
+        domain_id: "default"
+        category: "Infrastructure"
+        sequence_number: 110
+        rules:
+        - action: "ALLOW"
+          disabled: true
+          description: "Access Restrictions for Jump Hosts"
+          sequence_number: 100
+          display_name: "Allow-Bastion-Zone-to-VCF"
+          direction: "IN_OUT"
+          source_groups:
+            - "/infra/domains/default/groups/MainConsole"
+            - "/infra/domains/default/groups/Manager"
+          destination_groups: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+          services: 
+            - "/infra/services/HTTPS"
+            - "/infra/services/SSH"
+          service_entries:
+            - l4_protocol: "TCP"
+              destination_ports: ["5480"]
+              resource_type: "L4PortSetServiceEntry"
+          notes: "Restrict Communication from the Jump Hosts to only to SDDC, VI/MGMT WLD, and Aria endpoints"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+        - action: "ALLOW"
+          disabled: true
+          description: "Outbound connectivity to Infrastructure Services"
+          sequence_number: 110
+          display_name: "Allow-VCF-to-InfraSvc"
+          direction: "IN_OUT"
+          source_groups: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+          destination_groups: 
+            - "/infra/domains/default/groups/InfraSvc_Zone"
+          services: 
+            - "/infra/services/DNS-UDP"
+            - "/infra/services/NTP"
+            - "/infra/services/SSH"
+            - "/infra/services/Syslog-Server-UDP"
+          notes: "Restrict Communication from the Jump Hosts to only to SDDC, VI/MGMT WLD, and Aria endpoints"
+          ip_protocol: IPV4
+          disabled: true
+          scope: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+        - action: "ALLOW"
+          disabled: true
+          description: "AD-Access-for-VCF-Zone"
+          sequence_number: 120
+          display_name: "AD-Access-for-VCF-Zone"
+          direction: "IN_OUT"
+          source_groups: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+          destination_groups: 
+            - "/infra/domains/default/groups/InfraSvc_Zone"
+          services: 
+            - "ANY"
+          profiles: 
+            - "/infra/context-profiles/ACTIVDIR"
+          notes: "Restrict Communication from the Jump Hosts to only to SDDC, VI/MGMT WLD, and Aria endpoints"
+          ip_protocol: IPV4
+          disabled: true
+          scope: 
+            - "/infra/domains/default/groups/VCF_Zone"
+        - action: "ALLOW"
+          disabled: true
+          description: "3rd-party-tool-access"
+          sequence_number: 130
+          display_name: "3rd-party-tool-access"
+          direction: "IN_OUT"
+          source_groups: 
+            - "/infra/domains/default/groups/Tools_Zone"
+          destination_groups: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+          services: 
+            - "/infra/services/HTTPS"
+            - "/infra/services/SSH"
+          notes: "Restrict Communication from the Jump Hosts to only to SDDC, VI/MGMT WLD, and Aria endpoints"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+
+    - name: Create VCF Environment Security Policy
+      vmware.ansible_for_nsxt.nsxt_policy_security_policy:
+        hostname: "{{nsxt_hostname}}"
+        username: "{{nsxt_username}}"
+        password: "{{nsxt_password}}"
+        validate_certs: False
+        display_name: "VCF-Env-Sec-Policy"
+        state: "present"
+        domain_id: "default"
+        category: "Environment"
+        sequence_number: 1000
+        rules:
+        - action: "ALLOW"
+          disabled: true
+          description: "Allow SDDC Manager to communicate to all its compontnets"
+          sequence_number: 100
+          display_name: "Allow-VCF-Management"
+          direction: "IN_OUT"
+          source_groups: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+          destination_groups: 
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone" 
+          services: 
+            - "/infra/services/HTTPS"
+            - "/infra/services/SSH"
+          notes: "Allow SDDC Manager to communicate to all its compontnets"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+        - action: "ALLOW"
+          disabled: true
+          description: "Allow-vCenter-ELM-within-the-VCF-Domain"
+          sequence_number: 110
+          display_name: "Allow-Center-ELM"
+          direction: "IN_OUT"
+          source_groups: 
+            - "/infra/domains/default/groups/vCenter_Zone"
+          destination_groups: 
+            - "/infra/domains/default/groups/vCenter_Zone"
+          services: 
+            - "ANY"
+          service_entries:
+            - l4_protocol: "TCP"
+              destination_ports: ["389"]
+              resource_type: "L4PortSetServiceEntry"
+          notes: "Allow vCenter ELM within the VCF Domain"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/vCenter_Zone"
+        - action: "ALLOW"
+          disabled: true
+          description: "Allow-WLD-to-communicate-with-itself"
+          sequence_number: 120
+          display_name: "Allow-WLD1-to-WLD1"
+          direction: "IN_OUT"
+          source_groups: 
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+          destination_groups: 
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+          services: 
+            - "ANY"
+          notes: "Allow vCenter ELM within the VCF Domain"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+        - action: "ALLOW"
+          disabled: true
+          description: "Allow-Aria-Suite-to-WLDs"
+          sequence_number: 130
+          display_name: "Allow-Aria-Suite-to-WLDs"
+          direction: "IN_OUT"
+          source_groups: 
+            - "/infra/domains/default/groups/Aria_Zone"
+          destination_groups: 
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+          services: 
+            - "/infra/services/HTTPS"
+            - "/infra/services/SSH"
+          notes: "Allow SDDC Manager to communicate to all its compontnets"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+        - action: "ALLOW"
+          disabled: true
+          description: "Allow-WLDs-to-Aria-Suite"
+          sequence_number: 140
+          display_name: "Allow-WLDs-to-Aria-Suite"
+          direction: "IN_OUT"
+          source_groups: 
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+          destination_groups: 
+            - "/infra/domains/default/groups/Aria_Zone"
+          services: 
+            - "/infra/services/HTTPS"
+            - "/infra/services/SSH"
+            - "/infra/services/Syslog-Server-UDP"
+          notes: "Allow SDDC Manager to communicate to all its compontnets"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+        - action: "ALLOW"
+          disabled: true
+          description: "Outbound connectivity to Infrastructure Services"
+          sequence_number: 150
+          display_name: "Allow-VCF-to-InfraSvc"
+          direction: "IN_OUT"
+          source_groups: 
+            - "/infra/domains/default/groups/SDDC_Zone"
+            - "/infra/domains/default/groups/Mgmt_WLD_Zone"
+            - "/infra/domains/default/groups/VI_WLD1_Zone"
+            - "/infra/domains/default/groups/Aria_Zone"
+          destination_groups: 
+            - "ANY"
+          services: 
+            - "/infra/services/HTTPS"
+          profiles: 
+            - "/infra/context-profiles/TLS12"
+          notes: "Restrict Communication from the Jump Hosts to only to SDDC, VI/MGMT WLD, and Aria endpoints"
+          ip_protocol: IPV4
+          scope: 
+            - "/infra/domains/default/groups/VCF_Zone"

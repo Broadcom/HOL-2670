@@ -1,0 +1,10 @@
+---
+  vchostname: "vcsa-01a.corp.vmbeans.com"
+  vcusername: "administrator@vsphere.local"
+  vcpassword: "***"
+  vdsname: "RegionA01-vDS-COMP"
+  vcdatacenter: "RegionA01"
+  edgecluster: "RegionA01-COMP01"
+  branchcluster: "RegionA01-BRANCH01"
+  vcocluster: "RegionA01-VCO01"
+  datastore: "RegionA01-ISCSI01-COMP01"

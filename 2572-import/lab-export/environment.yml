@@ -1,0 +1,28 @@
+---
+    #vCenter related variables.
+    vc_display_name : "vcenter-mgmt"
+    vc_hostname: "vcenter-mgmt.vcf.sddc.lab"
+    vc_username: "administrator@vsphere.local"
+    vc_password: "***"
+    vc_datacenter: "mgmt-datacenter-01"
+    vc_mgmt_vds_name: "mgmt-vds01"
+    vc_mgmt_cluster: "mgmt-cluster-01"
+    vc_mgmt_datastore: "vcf-vsan"
+    vc_wld1_vds_name: "mgmt-domain-wld-cluster-01-vds01"
+    vc_wld1_cluster: "wld-cluster-01"
+    vc_wld1_datastore: "wld-cluster-01-vsan01"
+
+    #OVA Related Items
+    ova_path: "/home/holuser/l2vms/"
+    vm_name: 
+      - corp-web-01
+      - corp-web-02
+      - corp-app-01
+      - corp-db-01
+      - fin-web-01
+      - fin-app-01
+      - fin-db-01    
+      - hr-web-01
+      - hr-app-01
+      - hr-db-01 
+      
