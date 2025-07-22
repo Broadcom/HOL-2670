@@ -647,99 +647,6 @@ Firewall:
     scope:
     - /infra/domains/default/groups/M01_VC
     disabled: 'True'
-  - sequence_number: 60
-    display_name: Avi to NSX
-    id: Avi_to_NSX
-    description: Avi ALB to NSX Access
-    source_groups:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    destination_groups:
-    - /infra/domains/default/groups/M01_NSX
-    services:
-    - /infra/services/HTTPS
-    action: ALLOW
-    logged: true
-    scope:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'True'
-  - sequence_number: 70
-    display_name: Avi to vCenter
-    id: Avi_to_vCenter
-    description: Avi ALB to vCenter Access
-    source_groups:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    destination_groups:
-    - /infra/domains/default/groups/M01_VC
-    services:
-    - /infra/services/HTTPS
-    action: ALLOW
-    logged: true
-    scope:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    - /infra/domains/default/groups/M01_VC
-    disabled: 'True'
-  - sequence_number: 80
-    display_name: Avi SE to Avi CTL
-    id: Avi_SE_to_Avi_CTL
-    description: Avi Service Engines to Avi Controller Cluster
-    source_groups:
-    - /infra/domains/default/groups/M01_AVI_SE
-    destination_groups:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    services:
-    - /infra/services/Avi_SE_CTL_Access
-    action: ALLOW
-    logged: true
-    scope:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'True'
-  - sequence_number: 90
-    display_name: Avi CTL to Avi SE
-    id: Avi_CTL_to_Avi_SE
-    description: Avi Controller Cluster to Avi Service Engine
-    source_groups:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    destination_groups:
-    - /infra/domains/default/groups/M01_AVI_SE
-    services:
-    - /infra/services/Avi_SE_CTL_Access
-    action: ALLOW
-    logged: true
-    scope:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'True'
-  - sequence_number: 100
-    display_name: Avi CTL to Avi CTL
-    id: Avi_CTL_to_Avi_CTL
-    description: Avi Controller Cluster to Avi Controller Cluster
-    source_groups:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    destination_groups:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    services:
-    - /infra/services/Avi_CTL_Access
-    action: ALLOW
-    logged: true
-    scope:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'True'
-  - sequence_number: 110
-    display_name: Avi CTL to Cloud Services
-    id: Avi_CTL_to_Cloud_Services
-    description: Avi Controller Cluster to Cloud Services
-    source_groups:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    destination_groups:
-    - ANY
-    profiles:
-    - /infra/context-profiles/Avi_Pulse_FQDNs
-    services:
-    - /infra/services/HTTPS
-    action: ALLOW
-    logged: true
-    scope:
-    - /infra/domains/default/groups/M01_AVI_CTL
-    disabled: 'True'
   - sequence_number: 50
     display_name: Management Domain Drop
     id: Management_Domain_Drop
@@ -843,6 +750,130 @@ Firewall:
     scope:
     - /infra/domains/default/groups/W01_VC
     disabled: 'True'
+  - sequence_number: 50
+    display_name: Management Domain Drop
+    id: Management_Domain_Drop
+    description: Management Domain Default Rule
+    source_groups:
+    - ANY
+    destination_groups:
+    - ANY
+    services:
+    - ANY
+    action: DROP
+    logged: true
+    scope:
+    - /infra/domains/default/groups/W01_WLD
+    disabled: 'True'
+  category: Application
+  scope:
+  - ANY
+  description: Firewall Section for VCF W01_WLD Service Access
+  id: W01_WLD
+- display_name: M01_WLD_Avi
+  sequence_number: 70
+  rules:
+  - sequence_number: 60
+    display_name: Avi to NSX
+    id: Avi_to_NSX
+    description: Avi ALB to NSX Access
+    source_groups:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    destination_groups:
+    - /infra/domains/default/groups/M01_NSX
+    services:
+    - /infra/services/HTTPS
+    action: ALLOW
+    logged: true
+    scope:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    disabled: 'True'
+  - sequence_number: 70
+    display_name: Avi to vCenter
+    id: Avi_to_vCenter
+    description: Avi ALB to vCenter Access
+    source_groups:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    destination_groups:
+    - /infra/domains/default/groups/M01_VC
+    services:
+    - /infra/services/HTTPS
+    action: ALLOW
+    logged: true
+    scope:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    - /infra/domains/default/groups/M01_VC
+    disabled: 'True'
+  - sequence_number: 80
+    display_name: Avi SE to Avi CTL
+    id: Avi_SE_to_Avi_CTL
+    description: Avi Service Engines to Avi Controller Cluster
+    source_groups:
+    - /infra/domains/default/groups/M01_AVI_SE
+    destination_groups:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    services:
+    - /infra/services/Avi_SE_CTL_Access
+    action: ALLOW
+    logged: true
+    scope:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    disabled: 'True'
+  - sequence_number: 90
+    display_name: Avi CTL to Avi SE
+    id: Avi_CTL_to_Avi_SE
+    description: Avi Controller Cluster to Avi Service Engine
+    source_groups:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    destination_groups:
+    - /infra/domains/default/groups/M01_AVI_SE
+    services:
+    - /infra/services/Avi_SE_CTL_Access
+    action: ALLOW
+    logged: true
+    scope:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    disabled: 'True'
+  - sequence_number: 100
+    display_name: Avi CTL to Avi CTL
+    id: Avi_CTL_to_Avi_CTL
+    description: Avi Controller Cluster to Avi Controller Cluster
+    source_groups:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    destination_groups:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    services:
+    - /infra/services/Avi_CTL_Access
+    action: ALLOW
+    logged: true
+    scope:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    disabled: 'True'
+  - sequence_number: 110
+    display_name: Avi CTL to Cloud Services
+    id: Avi_CTL_to_Cloud_Services
+    description: Avi Controller Cluster to Cloud Services
+    source_groups:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    destination_groups:
+    - ANY
+    profiles:
+    - /infra/context-profiles/Avi_Pulse_FQDNs
+    services:
+    - /infra/services/HTTPS
+    action: ALLOW
+    logged: true
+    scope:
+    - /infra/domains/default/groups/M01_AVI_CTL
+    disabled: 'True'
+  category: Application
+  scope:
+  - ANY
+  description: Firewall Section for VCF M01_WLD Service Access
+  id: M01_WLD_Avi
+  - display_name: W01_WLD_Avi
+  sequence_number: 80
+  rules:
   - sequence_number: 60
     display_name: Avi to NSX
     id: Avi_to_NSX
@@ -937,23 +968,8 @@ Firewall:
     scope:
     - /infra/domains/default/groups/W01_AVI_CTL
     disabled: 'True'
-  - sequence_number: 50
-    display_name: Management Domain Drop
-    id: Management_Domain_Drop
-    description: Management Domain Default Rule
-    source_groups:
-    - ANY
-    destination_groups:
-    - ANY
-    services:
-    - ANY
-    action: DROP
-    logged: true
-    scope:
-    - /infra/domains/default/groups/W01_WLD
-    disabled: 'True'
   category: Application
   scope:
   - ANY
   description: Firewall Section for VCF W01_WLD Service Access
-  id: W01_WLD
+  id: W01_WLD_Avi
