@@ -871,7 +871,7 @@ Firewall:
   - ANY
   description: Firewall Section for VCF M01_WLD Service Access
   id: M01_WLD_Avi
-  - display_name: W01_WLD_Avi
+- display_name: W01_WLD_Avi
   sequence_number: 80
   rules:
   - sequence_number: 60
