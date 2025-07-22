@@ -1,0 +1,15 @@
+---
+
+- name: Remove rule 3055
+  nsxt_policy_security_policy:
+    hostname: "{{ NSXT_CREDENTIALS.node }}"
+    username: "{{ NSXT_CREDENTIALS.username }}"
+    password: "{{ NSXT_CREDENTIALS.password }}"
+    validate_certs: False
+    id: 5
+    display_name: "3 Tier App"
+    state: "present"
+    domain_id: "default"
+    rules:
+      - id: 3055
+        state: "absent"
