@@ -11,5 +11,9 @@
     state: "present"
     domain_id: "default"
     rules:
-      - id: 3055
+      - action: "ALLOW"
+        id: 3055
         state: "absent"
+        source_groups: ["/infra/domains/default/groups/app-group"]
+        destination_groups: ["/infra/domains/default/groups/db-group"]
+        services: ["/infra/services/MySQL"]
