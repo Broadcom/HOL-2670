@@ -2,7 +2,7 @@
 
 - name: Remove rule 3055
   nsxt_policy_security_policy:
-    hostname: "{{ NSXT_CREDENTIALS.node }}"
+    hostname: "{{ NSXT_CREDENTIALS.wld_node }}"
     username: "{{ NSXT_CREDENTIALS.username }}"
     password: "{{ NSXT_CREDENTIALS.password }}"
     validate_certs: False
