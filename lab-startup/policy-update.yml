@@ -1,15 +1,15 @@
 ---
 
-- name: Remove Old Policy
-  nsxt_policy_security_policy:
-    hostname: "{{ NSXT_CREDENTIALS.wld_node }}"
-    username: "{{ NSXT_CREDENTIALS.username }}"
-    password: "{{ NSXT_CREDENTIALS.password }}"
-    validate_certs: False
-    display_name: 3_Tier_App
-    state: "absent"
-    domain_id: "default"
-    category: "Application"
+#- name: Remove Old Policy
+#  nsxt_policy_security_policy:
+#    hostname: "{{ NSXT_CREDENTIALS.wld_node }}"
+#    username: "{{ NSXT_CREDENTIALS.username }}"
+#    password: "{{ NSXT_CREDENTIALS.password }}"
+#    validate_certs: False
+#    display_name: 3_Tier_App
+#    state: "absent"
+#    domain_id: "default"
+#    category: "Application"
 
 - name: Recreate Policy
   nsxt_policy_security_policy:
