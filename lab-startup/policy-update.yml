@@ -6,7 +6,7 @@
     username: "{{ NSXT_CREDENTIALS.username }}"
     password: "{{ NSXT_CREDENTIALS.password }}"
     validate_certs: False
-    id: 5
+    display_name: "3 Tier App"
     state: "absent"
     domain_id: "default"
     category: "Application"
@@ -17,7 +17,6 @@
     username: "{{ NSXT_CREDENTIALS.username }}"
     password: "{{ NSXT_CREDENTIALS.password }}"
     validate_certs: False
-    id: 5
     display_name: "3 Tier App"
     state: "present"
     domain_id: "default"
