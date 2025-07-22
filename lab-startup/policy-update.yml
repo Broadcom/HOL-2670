@@ -25,6 +25,7 @@
     rules:
       - action: "DROP"
         id: 3058
+        sequence_number: 100
         display_name: "Block Web to Web"
         source_groups: ["/infra/domains/default/groups/web-group"]
         destination_groups: ["/infra/domains/default/groups/web-group"]
@@ -36,6 +37,7 @@
           - "/infra/domains/default/groups/web-group"
       - action: "ALLOW"
         id: 3056
+        sequence_number: 110
         display_name: "All to Web"
         source_groups: "ANY"
         destination_groups: ["/infra/domains/default/groups/web-group"]
@@ -47,6 +49,7 @@
           - "/infra/domains/default/groups/web-group"
       - action: "ALLOW"
         id: 3054
+        sequence_number: 120
         display_name: "Web to App"
         source_groups: ["/infra/domains/default/groups/web-group"]
         destination_groups: ["/infra/domains/default/groups/app-group"]
@@ -59,6 +62,7 @@
           - "/infra/domains/default/groups/web-group"
 #      - action: "ALLOW"
 #        id: 3055
+#        sequence_number: 130
 #        display_name: "app to db"
 #        source_groups: ["/infra/domains/default/groups/app-group"]
 #        destination_groups: ["/infra/domains/default/groups/db-group"]
@@ -71,6 +75,7 @@
 #          - "/infra/domains/default/groups/db-group"
       - action: "DROP"
         id: 3057
+        sequence_number: 140
         display_name: "Block All"
         source_groups: "ANY"
         destination_groups: "ANY"
