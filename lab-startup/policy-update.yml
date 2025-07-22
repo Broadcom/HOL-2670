@@ -17,6 +17,7 @@
     username: "{{ NSXT_CREDENTIALS.username }}"
     password: "{{ NSXT_CREDENTIALS.password }}"
     validate_certs: False
+    id: 3_Tier_App
     display_name: "3 Tier App"
     state: "present"
     domain_id: "default"
