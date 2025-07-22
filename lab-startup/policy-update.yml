@@ -10,10 +10,65 @@
     display_name: "3 Tier App"
     state: "present"
     domain_id: "default"
+    category: "Application"
     rules:
+      - action: "DROP"
+        id: 3058
+        display_name: "Block Web to Web"
+        source_groups: ["/infra/domains/default/groups/web-group"]
+        destination_groups: ["/infra/domains/default/groups/web-group"]
+        services: ["/infra/services/HTTPS"]
+        ip_protocol: IPV4
+        direction: "IN_OUT"
+        logged: true
+        scope: 
+          - "/infra/domains/default/groups/web-group"
       - action: "ALLOW"
-        id: 3055
-        state: "absent"
-        source_groups: ["/infra/domains/default/groups/app-group"]
-        destination_groups: ["/infra/domains/default/groups/db-group"]
-        services: ["/infra/services/MySQL"]
+        id: 3056
+        display_name: "All to Web"
+        source_groups: "ANY"
+        destination_groups: ["/infra/domains/default/groups/web-group"]
+        services: ["/infra/services/HTTPS"]
+        ip_protocol: IPV4
+        direction: "IN_OUT"
+        logged: true
+        scope: 
+          - "/infra/domains/default/groups/web-group"
+      - action: "ALLOW"
+        id: 3054
+        display_name: "Web to App"
+        source_groups: ["/infra/domains/default/groups/web-group"]
+        destination_groups: ["/infra/domains/default/groups/app-group"]
+        services: ["/infra/services/HTTP-8080"]
+        ip_protocol: IPV4
+        direction: "IN_OUT"
+        logged: true
+        scope: 
+          - "/infra/domains/default/groups/app-group"
+          - "/infra/domains/default/groups/web-group"
+#      - action: "ALLOW"
+#        id: 3055
+#        display_name: "app to db"
+#        source_groups: ["/infra/domains/default/groups/app-group"]
+#        destination_groups: ["/infra/domains/default/groups/db-group"]
+#        services: ["/infra/services/MySQL"]
+#        ip_protocol: IPV4
+#        direction: "IN_OUT"
+#        logged: true
+#        scope: 
+#          - "/infra/domains/default/groups/app-group"
+#          - "/infra/domains/default/groups/db-group"
+      - action: "DROP"
+        id: 3057
+        display_name: "Block All"
+        source_groups: "ANY"
+        destination_groups: "ANY"
+        direction: "IN_OUT"
+        services: "ANY"
+        ip_protocol: IPV4
+        direction: "IN_OUT"
+        logged: true
+        scope: 
+          - "/infra/domains/default/groups/app-group"
+          - "/infra/domains/default/groups/db-group"
+          - "/infra/domains/default/groups/web-group"
