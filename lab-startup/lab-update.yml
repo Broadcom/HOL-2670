@@ -1,0 +1,15 @@
+- hosts: localhost
+  connection: local
+  collections:
+    - vmware.ansible_for_nsxt
+
+  tasks:
+  - include_vars: NSXT_Variables.yml
+
+  - name: Update Lab Configuration
+    block:
+      
+      # Correct DFW Policies
+        - name: vDefend DFW Configuration | Remove Unneeded Policies
+          include_tasks:
+            file: ./policy-update.yml
