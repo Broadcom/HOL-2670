@@ -31,7 +31,7 @@ if lsf.labcheck == False:
 # add any code you want to run at the end of the startup before final "Ready"
 lsf.write_output("Starting Lab updates")
 
-lsf.run_command("chmod +x /vpodrepo/2026-labs/2670/lab-update.sh")
+#lsf.run_command("chmod +x /vpodrepo/2026-labs/2670/lab-update.sh")
 lsf.run_command("/bin/bash /vpodrepo/2026-labs/2670/lab-update.sh")
 
 lsf.write_output("Finished Lab updates")
