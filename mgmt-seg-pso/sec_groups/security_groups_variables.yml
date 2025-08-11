@@ -418,12 +418,14 @@ sec_groups:
   - resource_type: IPAddressExpression
     ip_addresses:
     - 10.1.1.164
+    - 10.1.1.162
   id: INFRA_SVC
 - display_name: TOOLS
   expression:
   - resource_type: IPAddressExpression
     ip_addresses:
     - 10.1.1.164
+    - 10.1.1.162
   id: TOOLS
 - display_name: AD_SVC
   expression:
