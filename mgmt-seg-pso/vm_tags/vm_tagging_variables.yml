@@ -47,18 +47,18 @@ vm_tags:
     tag: MGMT
   - scope: wld
     tag: M01
-- vmname: auto-a-8fpl5
-  tags:
-  - scope: tier
-    tag: APP
-  - scope: environemnt
-    tag: PROD
-  - scope: application
-    tag: ARIA
-  - scope: zone
-    tag: MGMT
-  - scope: wld
-    tag: M01
+#- vmname: auto-a-8fpl5
+#  tags:
+#  - scope: tier
+#    tag: APP
+#  - scope: environemnt
+#    tag: PROD
+#  - scope: application
+#    tag: ARIA
+#  - scope: zone
+#    tag: MGMT
+#  - scope: wld
+#    tag: M01
 - vmname: vrli-master
   tags:
   - scope: tier
