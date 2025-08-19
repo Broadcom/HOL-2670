@@ -1,0 +1,164 @@
+---
+
+- name: Remove PAL.PROD.HR.ALL
+  vmware.ansible_for_nsxt.nsxt_policy_group:
+    hostname: "{{NSXT_CREDENTIALS.wld_node}}"
+    username: "{{NSXT_CREDENTIALS.username}}"
+    password: "{{NSXT_CREDENTIALS.password}}"
+    validate_certs: False
+    display_name: "PAL.PROD.HR.ALL"
+    state: "absent"
+    domain_id: "default"
+    expression:
+          - member_type: "VirtualMachine"
+            value: "env|PROD"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "app|HR"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "city|PAL"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+  delegate_to: localhost
+  ignore_errors: true
+- name: Remove LON.PROD.HR.ALL
+  vmware.ansible_for_nsxt.nsxt_policy_group:
+    hostname: "{{NSXT_CREDENTIALS.wld_node}}"
+    username: "{{NSXT_CREDENTIALS.username}}"
+    password: "{{NSXT_CREDENTIALS.password}}"
+    validate_certs: False
+    display_name: "LON.PROD.HR.ALL"
+    state: "absent"
+    domain_id: "default"
+    expression:
+          - member_type: "VirtualMachine"
+            value: "env|PROD"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "app|HR"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "city|LON"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+  delegate_to: localhost
+  ignore_errors: true
+- name: Remove NY.PROD.FIN.ALL
+  vmware.ansible_for_nsxt.nsxt_policy_group:
+    hostname: "{{NSXT_CREDENTIALS.wld_node}}"
+    username: "{{NSXT_CREDENTIALS.username}}"
+    password: "{{NSXT_CREDENTIALS.password}}"
+    validate_certs: False
+    display_name: "NY.PROD.FIN.ALL"
+    state: "absent"
+    domain_id: "default"
+    expression:
+          - member_type: "VirtualMachine"
+            value: "env|PROD"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "app|FIN"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "city|NY"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+  delegate_to: localhost
+  ignore_errors: true
+- name: Remove NY.STG.CRM.ALL
+  vmware.ansible_for_nsxt.nsxt_policy_group:
+    hostname: "{{NSXT_CREDENTIALS.wld_node}}"
+    username: "{{NSXT_CREDENTIALS.username}}"
+    password: "{{NSXT_CREDENTIALS.password}}"
+    validate_certs: False
+    display_name: "NY.STG.CRM.ALL"
+    state: "absent"
+    domain_id: "default"
+    expression:
+          - member_type: "VirtualMachine"
+            value: "env|STG"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "app|CRM"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "city|NY"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+  delegate_to: localhost
+  ignore_errors: true
+- name: Remove PAR.PROD.CRM.ALL
+  vmware.ansible_for_nsxt.nsxt_policy_group:
+    hostname: "{{NSXT_CREDENTIALS.wld_node}}"
+    username: "{{NSXT_CREDENTIALS.username}}"
+    password: "{{NSXT_CREDENTIALS.password}}"
+    validate_certs: False
+    display_name: "PAR.PROD.CRM.ALL"
+    state: "absent"
+    domain_id: "default"
+    expression:
+          - member_type: "VirtualMachine"
+            value: "env|PROD"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "app|CRM"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "city|PAR"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+  delegate_to: localhost
+  ignore_errors: true
+- name: Remove PAR.PROD.FIN.ALL
+  vmware.ansible_for_nsxt.nsxt_policy_group:
+    hostname: "{{NSXT_CREDENTIALS.wld_node}}"
+    username: "{{NSXT_CREDENTIALS.username}}"
+    password: "{{NSXT_CREDENTIALS.password}}"
+    validate_certs: False
+    display_name: "PAR.PROD.FIN.ALL"
+    state: "absent"
+    domain_id: "default"
+    expression:
+          - member_type: "VirtualMachine"
+            value: "env|PROD"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "app|FIN"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+          - member_type: "VirtualMachine"
+            value: "city|PAR"
+            key: "Tag"
+            operator: "EQUALS"
+            resource_type: "Condition"
+  delegate_to: localhost
+  ignore_errors: true

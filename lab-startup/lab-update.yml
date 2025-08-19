@@ -9,7 +9,10 @@
   - name: Update Lab Configuration
     block:
       
-      # Correct DFW Policies
-        - name: vDefend DFW Configuration | Remove Unneeded Policies
+      # Remove Bad Groups
+        - name: vDefend Group Configuration | Remove Invalid Groups
           include_tasks:
-            file: ./policy-update.yml
+            file: ./group-removal.yml
+        - name: vDefend Group Configuration | Add valid Groups
+          include_tasks:
+            file: ./group-restore.yml
