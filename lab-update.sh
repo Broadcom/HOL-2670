@@ -19,3 +19,6 @@ ansible-playbook /vpodrepo/2026-labs/2670/mgmt-seg-pso/vDefend_DFW_Configuration
 
 #Deploy VMflowgen configuration
 /bin/bash /vpodrepo/2026-labs/2670/lab-startup/enable-vmflowgen.sh | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
+
+#Execute the final updates
+/bin/bash /vpodrepo/2026-labs/2670/lab-startup/final-updates.sh | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
