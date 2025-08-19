@@ -16,7 +16,7 @@ wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1gTZJ
 gpg --pinentry-mode=loopback --passphrase 'VMware123!VMware123!' --output /home/holuser/library.yaml.tar.gz --decrypt /home/holuser/library.yaml.tar.gz.gpg
 tar -xvzf /home/holuser/library.yaml.tar.gz -C /home/holuser/
 
-Copy the library file to the flowgen VM
+#Copy the library file to the flowgen VM
 sshpass -p $vPodPW ssh root@vmflowgen.site-a.vcf.lab  'mv /opt/vmware/vmflowgen/library.yaml /opt/vmware/vmflowgen/library.yaml.bak'
 sshpass -p $vPodPW scp /home/holuser/library.yaml root@vmflowgen.site-a.vcf.lab:/opt/vmware/vmflowgen/library.yaml
 sshpass -p $vPodPW ssh root@vmflowgen.site-a.vcf.lab  'systemctl restart vmflowgen'
