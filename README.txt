@@ -1,28 +1,27 @@
-Hey Quinton Update Me in GIT!
-
-THIS IS AN EXAMPLE. REPLACE THIS WITH YOUR OWN README.txt using the pattern below.
-
-This is customer facing so please make it look professional. Thanks.
-
-This file can be updated and will be copied to the console desktop at startup.
-
-NOTE: this file is public so NEVER include passwords.
-
 * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - *
-*                       HOL-2670 ENTER THE TITLE OF YOUR LAB                              *
+*        HOL-2670 VMware vDefend Firewall with Advanced Threat Prevention       *
 * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - *
 
-Primary benefits of your lab.
+This vPod will focus on the VMware vDefend Firewall with Advanced Threat Prevention solution.
 
-More detail about your lab: Products included.
+Within the lab we have the following components installed:
 
-Additional notes and "interesting" facts about your lab. (pre-release code, simulated data, etc.)
+VMware VCF 9.0
+vDefend Security Services Platform (SSP) 5.0
+VMFlow Gen v0.9 (Internal Testing Tool)
+
+The following VCF Componentes will be in use durring the lab:
+vCenter Server 9.0
+vSphere ESXi 9.0
+VCF Operations 9.0
+VCF Operations for Logs 9.0
+VMware NSX 9.0
 
 Please use the VMware Lab Platform "Send Text" control and copy/paste from Lab Manual
 
 Please record account names for this lab. All acccounts use the standard Hands-on Labs password.
 
-=== Module 1 ===
+=== Standard Credentials for the lab ===
 
 Credentials for all vCenter Operations Manager Instances:
 User name: admin
@@ -33,6 +32,18 @@ User name: root
 For the vSphere Client, use:
 User name: administrator@vsphere.local
 
-=== Module 2 ===
+For NSX Manager, Security Services Platform (SSP) and VMFlowgen:
+User name: admin
 
-big long command line that nobody wants to type
+ === All passwords will provided in the user manual. ===
+
+ === Lab Authors === 
+
+Captains:
+ Quinton Coelho
+ Lynne Dark
+ Joshua Newton
+
+Principals: 
+ Frank Snyder
+ Nick Robbins
