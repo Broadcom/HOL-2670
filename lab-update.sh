@@ -5,11 +5,11 @@
 #cleanup existing VMflowgen Configuration
 /bin/bash /vpodrepo/2026-labs/2670/lab-startup/cleanup-vmflowgen.sh | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
 
-#Execute and Ansible tasks to prepare the lab
-ansible-playbook /vpodrepo/2026-labs/2670/lab-startup/lab-update.yml | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
-
 #Update vmflogen topologies and libraries
 /bin/bash /vpodrepo/2026-labs/2670/lab-startup/update-vmflowgen.sh | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
+
+#Execute and Ansible tasks to prepare the lab
+ansible-playbook /vpodrepo/2026-labs/2670/lab-startup/lab-update.yml | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
 
 # Clear the GEO IP data for the lab
 /bin/bash /vpodrepo/2026-labs/2670/lab-startup/clear-geo.sh | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
