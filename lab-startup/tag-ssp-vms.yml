@@ -31,8 +31,7 @@
       hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
       username: "{{ NSXT_CREDENTIALS.username }}"
       password: "{{ NSXT_CREDENTIALS.password }}"
-      validate_certs: no
-    delegate_to: localhost
+      validate_certs: False
     register: vm_info
   
   - name: Validate vm_names variable
