@@ -58,4 +58,4 @@
           tag: MGMT
         - scope: wld
           tag: W01
-      loop: "{{ ssp_vms }}"
+    loop: "{{ ssp_vms }}"
