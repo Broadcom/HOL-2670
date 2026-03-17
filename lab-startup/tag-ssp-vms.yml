@@ -1,0 +1,62 @@
+- hosts: localhost
+  connection: local
+  collections:
+    - vmware.ansible_for_nsxt
+  
+  tasks:
+  - include_vars: NSXT_Variables.yml
+
+  - name: Tag SSPi
+    vmware.ansible_for_nsxt.nsxt_vm_tags:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      virtual_machine_display_name: "ssp-installer-01a"
+      remove_other_tags: False
+      add_tags:
+        - scope: tier
+          tag: APP
+        - scope: environemnt
+          tag: PROD
+        - scope: application
+          tag: SSPi
+        - scope: zone
+          tag: MGMT
+        - scope: wld
+          tag: W01
+
+  - name: Get VM Names
+    community.vmware.vmware_vm_info:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: no
+    delegate_to: localhost
+    register: vm_info
+  
+  - name: Validate vm_names variable
+    set_fact:
+      ssp_vms: "{{ vm_info.virtual_machines | select('search','ssp-site-a') | selectattr('guest_name', 'defined') | map(attribute='guest_name') }}"
+
+
+  - name: Tag SSP VMs
+    vmware.ansible_for_nsxt.nsxt_vm_tags:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      virtual_machine_display_name: "{{ item }}"
+      remove_other_tags: False
+      add_tags:
+        - scope: tier
+          tag: APP
+        - scope: environemnt
+          tag: PROD
+        - scope: application
+          tag: SSPi
+        - scope: zone
+          tag: MGMT
+        - scope: wld
+          tag: W01
+      loop: "{{ ssp_vms }}"
