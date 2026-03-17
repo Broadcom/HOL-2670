@@ -18,6 +18,6 @@ NSXT_CREDENTIALS:
 VCENTER_CREDENTIALS:
   mgmt_node: "vc-mgmt-a.site-a.vcf.lab"
   mgmt_username: "administrator@vsphere.local"
-  password: "{{ lab_pw }}"
+  mgmt_password: "{{ lab_pw }}"
 
 STATE: present
