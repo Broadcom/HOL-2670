@@ -54,7 +54,7 @@
         - scope: environemnt
           tag: PROD
         - scope: application
-          tag: SSPi
+          tag: SSP
         - scope: zone
           tag: MGMT
         - scope: wld
