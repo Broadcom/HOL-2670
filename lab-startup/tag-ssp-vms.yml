@@ -29,8 +29,8 @@
   - name: Get VM Names
     community.vmware.vmware_vm_info:
       hostname: "{{ VCENTER_CREDENTIALS.mgmt_node }}"
-      username: "{{ VCENTER_CREDENTIALS.username }}"
-      password: "{{ VCENTER_CREDENTIALS.password }}"
+      username: "{{ VCENTER_CREDENTIALS.mgmt_username }}"
+      password: "{{ VCENTER_CREDENTIALS.mgmt_password }}"
       validate_certs: False
     register: vm_info
   
