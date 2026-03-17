@@ -36,10 +36,10 @@
   
   - name: Validate vm_names variable
     set_fact:
-      ssp_vms: "{{ vm_info.virtual_machines | select('search','ssp-site-a') | selectattr('guest_name', 'defined') | map(attribute='guest_name') }}"
+      ssp_workers: "{{ vm_info.virtual_machines | select('search','ssp-site-a-md') | selectattr('guest_name', 'defined') | map(attribute='guest_name') }}"
+      ssp_controllers: "{{ vm_info.virtual_machines | select('search','ssp-site-a-cont') | selectattr('guest_name', 'defined') | map(attribute='guest_name') }}"
 
-
-  - name: Tag SSP VMs
+  - name: Tag SSP Controllers
     vmware.ansible_for_nsxt.nsxt_vm_tags:
       hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
       username: "{{ NSXT_CREDENTIALS.username }}"
@@ -58,4 +58,25 @@
           tag: MGMT
         - scope: wld
           tag: W01
-    loop: "{{ ssp_vms }}"
+    loop: "{{ ssp_controllers }}"
+  
+  - name: Tag SSP Workers
+    vmware.ansible_for_nsxt.nsxt_vm_tags:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      virtual_machine_display_name: "{{ item }}"
+      remove_other_tags: False
+      add_tags:
+        - scope: tier
+          tag: APP
+        - scope: environemnt
+          tag: PROD
+        - scope: application
+          tag: SSP
+        - scope: zone
+          tag: MGMT
+        - scope: wld
+          tag: W01
+    loop: "{{ ssp_workers }}"
