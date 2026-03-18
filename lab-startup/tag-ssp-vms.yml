@@ -80,3 +80,18 @@
         - scope: wld
           tag: W01
     loop: "{{ ssp_workers }}"
+
+  - name: Update Security Group
+    vmware.ansible_for_nsxt.nsxt_policy_group:
+      hostname: "{{ NSXT_CREDENTIALS.node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      state: "present"
+      domain_id: "default"
+      validate_certs: false
+      display_name: M01_SSPM
+      expression:
+      - resource_type: IPAddressExpression
+        ip_addresses:
+        - 10.1.9.30-10.1.9.49
+      id: M01_SSPM 
