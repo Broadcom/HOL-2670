@@ -83,7 +83,7 @@
 
   - name: Update Security Group
     vmware.ansible_for_nsxt.nsxt_policy_group:
-      hostname: "{{ NSXT_CREDENTIALS.node }}"
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
       username: "{{ NSXT_CREDENTIALS.username }}"
       password: "{{ NSXT_CREDENTIALS.password }}"
       state: "present"
