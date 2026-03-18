@@ -119,7 +119,7 @@
         - /infra/domains/default/groups/W01_SSPI
         - /infra/domains/default/groups/W01_SSPM
         services:
-        - /infra/services/HTTPS
+        - /infra/services/BASTION_Jump_Server
         action: ALLOW
         logged: true
         scope:
