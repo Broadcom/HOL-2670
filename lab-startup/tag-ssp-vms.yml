@@ -89,12 +89,12 @@
       state: "present"
       domain_id: "default"
       validate_certs: false
-      display_name: M01_SSPM
+      display_name: W01_SSPM
       expression:
       - resource_type: IPAddressExpression
         ip_addresses:
         - 10.1.9.30-10.1.9.49
-      id: M01_SSPM 
+      id: W01_SSPM 
 
 
   - name: Update Security Policy
