@@ -106,7 +106,7 @@
       state: "present"
       domain_id: "default"
       locked: False
-        sequence_number: 40
+      sequence_number: 40
       rules:
       - sequence_number: 10
         display_name: Bastion to SSP
