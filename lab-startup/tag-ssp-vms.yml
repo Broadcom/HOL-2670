@@ -1,0 +1,245 @@
+- hosts: localhost
+  connection: local
+  collections:
+    - vmware.ansible_for_nsxt
+  
+  tasks:
+  - include_vars: NSXT_Variables.yml
+
+  - name: Tag SSPi
+    vmware.ansible_for_nsxt.nsxt_vm_tags:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      virtual_machine_display_name: "ssp-installer-01a"
+      remove_other_tags: False
+      add_tags:
+        - scope: tier
+          tag: APP
+        - scope: environemnt
+          tag: PROD
+        - scope: application
+          tag: SSPi
+        - scope: zone
+          tag: MGMT
+        - scope: wld
+          tag: W01
+
+  - name: Get VM Names
+    community.vmware.vmware_vm_info:
+      hostname: "{{ VCENTER_CREDENTIALS.mgmt_node }}"
+      username: "{{ VCENTER_CREDENTIALS.mgmt_username }}"
+      password: "{{ VCENTER_CREDENTIALS.mgmt_password }}"
+      validate_certs: False
+    register: vm_info
+  
+  - name: Validate vm_names variable
+    set_fact:
+      ssp_workers: "{{ vm_info.virtual_machines | select('search','ssp-site-a-md') | selectattr('guest_name', 'defined') | map(attribute='guest_name') }}"
+      ssp_controllers: "{{ vm_info.virtual_machines | select('search','ssp-site-a-cont') | selectattr('guest_name', 'defined') | map(attribute='guest_name') }}"
+
+  - name: Tag SSP Controllers
+    vmware.ansible_for_nsxt.nsxt_vm_tags:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      virtual_machine_display_name: "{{ item }}"
+      remove_other_tags: False
+      add_tags:
+        - scope: tier
+          tag: APP
+        - scope: environemnt
+          tag: PROD
+        - scope: application
+          tag: SSP
+        - scope: zone
+          tag: MGMT
+        - scope: wld
+          tag: W01
+    loop: "{{ ssp_controllers }}"
+  
+  - name: Tag SSP Workers
+    vmware.ansible_for_nsxt.nsxt_vm_tags:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      virtual_machine_display_name: "{{ item }}"
+      remove_other_tags: False
+      add_tags:
+        - scope: tier
+          tag: APP
+        - scope: environemnt
+          tag: PROD
+        - scope: application
+          tag: SSP
+        - scope: zone
+          tag: MGMT
+        - scope: wld
+          tag: W01
+    loop: "{{ ssp_workers }}"
+
+  - name: Update Security Group
+    vmware.ansible_for_nsxt.nsxt_policy_group:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      state: "present"
+      domain_id: "default"
+      validate_certs: false
+      display_name: W01_SSPM
+      expression:
+      - resource_type: IPAddressExpression
+        ip_addresses:
+        - 10.1.9.30-10.1.9.49
+      id: W01_SSPM 
+
+
+  - name: Update Security Policy
+    vmware.ansible_for_nsxt.nsxt_policy_security_policy:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      state: "present"
+      domain_id: "default"
+      locked: False
+      sequence_number: 40
+      rules:
+      - sequence_number: 10
+        display_name: Bastion to SSP
+        id: Bastion_to_SSP
+        description: SSP to NSX Managers Access
+        source_groups:
+        - /infra/domains/default/groups/BASTION
+        destination_groups:
+        - /infra/domains/default/groups/W01_SSP 
+        - /infra/domains/default/groups/W01_SSPI
+        - /infra/domains/default/groups/W01_SSPM
+        services:
+        - /infra/services/BASTION_Jump_Server
+        action: ALLOW
+        logged: true
+        scope:
+        - /infra/domains/default/groups/W01_SSP
+        - /infra/domains/default/groups/W01_NSX
+        disabled: 'True'
+      - sequence_number: 10
+        display_name: SSP to NSX
+        id: SSP_to_NSX
+        description: SSP to NSX Managers Access
+        source_groups:
+        - /infra/domains/default/groups/W01_SSP
+        destination_groups:
+        - /infra/domains/default/groups/W01_NSX
+        services:
+        - /infra/services/HTTPS
+        action: ALLOW
+        logged: true
+        scope:
+        - /infra/domains/default/groups/W01_SSP
+        - /infra/domains/default/groups/W01_NSX
+        disabled: 'True'
+      - sequence_number: 20
+        display_name: SSPI to SSP
+        id: SSPI_to_SSP
+        description: SSPI to SSP Access
+        source_groups:
+        - /infra/domains/default/groups/W01_SSPI
+        destination_groups:
+        - /infra/domains/default/groups/W01_SSP
+        services:
+        - /infra/services/SSPI_Services
+        action: ALLOW
+        logged: true
+        scope:
+        - /infra/domains/default/groups/W01_SSPI
+        - /infra/domains/default/groups/W01_SSP
+        disabled: 'True'
+      - sequence_number: 30
+        display_name: SSP to SSPI Registry
+        id: SSP_to_SSPI_Registry
+        description: SSP to SSPI Registry Access
+        source_groups:
+        - /infra/domains/default/groups/W01_SSP
+        destination_groups:
+        - /infra/domains/default/groups/W01_SSPI
+        services:
+        - /infra/services/HTTPS
+        action: ALLOW
+        logged: true
+        scope:
+        - /infra/domains/default/groups/W01_SSP
+        - /infra/domains/default/groups/W01_SSPI
+        disabled: 'True'
+      - sequence_number: 40
+        display_name: VCF MGMT to SSP
+        id: VCF_MGMT_to_SSP
+        description: SSP Ingestion Access
+        source_groups:
+        - /infra/domains/default/groups/W01_NSX
+        - /infra/domains/default/groups/W01_HOSTS
+        - /infra/domains/default/groups/W01_EDGES
+        - /infra/domains/default/groups/W01_SVM
+        destination_groups:
+        - /infra/domains/default/groups/W01_SSPM
+        services:
+        - /infra/services/SSPM_Services
+        action: ALLOW
+        logged: true
+        scope:
+        - /infra/domains/default/groups/W01_SSP
+        - /infra/domains/default/groups/W01_NSX
+        disabled: 'True'
+      - sequence_number: 50
+        display_name: SSP to NDR and MPS
+        id: SSP_to_NDR_and_MPS
+        description: SPP feeds for NDR and MPS Access
+        source_groups:
+        - /infra/domains/default/groups/W01_SSP
+        destination_groups:
+        - ANY
+        services:
+        - /infra/services/HTTPS
+        action: ALLOW
+        logged: true
+        scope:
+        - /infra/domains/default/groups/W01_SSP
+        disabled: 'True'
+      - sequence_number: 60
+        display_name: SSP to SIEM
+        id: SSP_to_SIEM
+        description: SSP to SIEMS Access
+        source_groups:
+        - /infra/domains/default/groups/W01_SSP
+        destination_groups:
+        - /infra/domains/default/groups/SIEM_SVC
+        services:
+        - /infra/services/HTTPS
+        action: ALLOW
+        logged: true
+        scope:
+        - /infra/domains/default/groups/W01_SSP
+        disabled: 'True'
+      - sequence_number: 70
+        display_name: SSP to SSP
+        id: SSP_to_SSP
+        description: SSP Internal Access
+        source_groups:
+        - /infra/domains/default/groups/W01_SSP
+        destination_groups:
+        - /infra/domains/default/groups/W01_SSP
+        services:
+        - ANY
+        action: ALLOW
+        logged: true
+        scope:
+        - /infra/domains/default/groups/W01_SSP
+        disabled: 'True'
+      category: Environment
+      scope:
+      - ANY
+      description: Firewall Section for VCF W01_WLD SSP Services Access
+      id: W01_WLD_SSP
