@@ -9,12 +9,15 @@ vPodUID="admin"
 vPodPW=$(</home/holuser/creds.txt) 
 tmpPW=pwgen -y 16 2
 
+vPodTOKEN=$(echo -n "${vPodUID}:${vPodPW}" | base64)
+tmpTOKEN=$(echo -n "${vPodUID}:${tmpPW}" | base64)
+
 echo $tmpPW
 
 # Step 1- Change to temporary pass:
 curl --location 'https://ssp.ans.lab/ssp/auth/change-password' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic YWRtaW46Vk13YXJlMTIzIVZNd2FyZTEyMyE=' \
+--header "Authorization: Basic ${vPodTOKEN}" \
 --data "{
     'username': ${vPodUID},
     'old_password': ${vPodPW},
@@ -24,7 +27,7 @@ curl --location 'https://ssp.ans.lab/ssp/auth/change-password' \
 # Step 2- change back to same password with extension of 180days:
  curl --location 'https://ssp.ans.lab/ssp/auth/change-password' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic YWRtaW46Vk13YXJlMSFWTXdhcmUxIQ==' \
+--header "Authorization: Basic ${tmpTOKEN}" \
 --data "{
     'username': ${vPodUID},
     'old_password': ${tmpPW},
