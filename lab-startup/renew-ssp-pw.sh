@@ -33,3 +33,23 @@ curl --location 'https://ssp.ans.lab/ssp/auth/change-password' \
     'old_password': ${tmpPW},
     'password': ${vPodPW}
 }"
+
+# Step 3 - Change SSPI to have a temporary Password
+curl 'https://sspi.ans.lab/sspi/operations/accounts' \
+--header 'Content-Type: application/json' \
+--header "Authorization: Basic ${tmpTOKEN}" \
+--data "{
+    'username': ${vPodUID},
+    'old_password': ${vPodPW},
+    'password': ${tmpPW}
+}"
+
+# Step 4 - Chage SSPI to have the Lab Password
+curl 'https://sspi.ans.lab/sspi/operations/accounts' \
+--header 'Content-Type: application/json' \
+--header "Authorization: Basic ${tmpTOKEN}" \
+--data "{
+    'username': ${vPodUID},
+    'old_password': ${tmpPW},
+    'password': ${vPodPW}
+}"
