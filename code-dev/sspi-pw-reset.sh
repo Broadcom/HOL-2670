@@ -21,8 +21,8 @@ echo "Setting TMP password on SSPi"
 # Step 3 - Change SSPI to have a temporary Password
 curl -k -w "\n%{http_code}\n" --location --request POST 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic "'"${tmpTOKEN}"'"' \
---data '{
+--header 'Authorization: Basic "'"${vPodTOKEN}"'"' \
+--data-raw '{
     'username': "'"${vPodUID}"'",
     'old_password': "'"${vPodPW}"'",
     'password': "'"${tmpPW}"'"
@@ -33,7 +33,7 @@ echo "Setting Lab password on SSPi"
 curl -k -w "\n%{http_code}\n" --location --request POST 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic "'"${tmpTOKEN}"'"' \
---data '{
+--data-raw '{
     'username': "'"${vPodUID}"'",
     'old_password': "'"${tmpPW}"'",
     'password': "'"${vPodPW}"'"

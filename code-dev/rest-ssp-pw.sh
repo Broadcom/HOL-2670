@@ -19,10 +19,10 @@ echo $tmpTOKEN
 
 echo "Setting TMP password on SSP"
 # Step 1- Change to temporary pass:
-curl -k -w "\n%{http_code}\n" --location --request POST 'https://ssp.site-a.vcf.lab/ssp/auth/change-password' \
+curl -vk -w "\n%{http_code}\n" --location --request POST 'https://ssp.site-a.vcf.lab/ssp/auth/change-password' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic "'"${vPodTOKEN}"'"' \
---data '{
+--data-raw '{
     "username": "'"${vPodUID}"'",
     "old_password": "'"${vPodPW}"'",
     "password": "'"${tmpPW}"'"
@@ -30,10 +30,10 @@ curl -k -w "\n%{http_code}\n" --location --request POST 'https://ssp.site-a.vcf.
 
 echo "Setting Lab password on SSP"
 # Step 2- change back to same password with extension of 180days:
- curl -k -w "\n%{http_code}\n" --location --request POST 'https://ssp.site-a.vcf.lab/ssp/auth/change-password' \
+ curl -vk -w "\n%{http_code}\n" --location --request POST 'https://ssp.site-a.vcf.lab/ssp/auth/change-password' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic "'"${tmpTOKEN}"'"' \
---data '{
+--data-raw '{
    "username": "'"${vPodUID}"'",
     "old_password": "'"${tmpPW}"'",
     "password": "'"${vPodPW}"'"
