@@ -19,7 +19,7 @@ echo $tmpTOKEN
 
 echo "Setting TMP password on SSP"
 # Step 1- Change to temporary pass:
-curl -vk -w "\n%{http_code}\n" --location 'https://ssp.site-a.vcf.lab/ssp/auth/change-password' \
+curl -k -w "\n%{http_code}\n" --location 'https://ssp.site-a.vcf.lab/ssp/auth/change-password' \
 -H "Content-Type: application/json" \
 -u "$vPodUID:$vPodPW" \
 -d "{
@@ -28,9 +28,11 @@ curl -vk -w "\n%{http_code}\n" --location 'https://ssp.site-a.vcf.lab/ssp/auth/c
     \"password\": \"$tmpPW\"
 }"
 
+sleep 2m
+
 echo "Setting Lab password on SSP"
 # Step 2- change back to same password with extension of 180days:
- curl -vk -w "\n%{http_code}\n" --location 'https://ssp.site-a.vcf.lab/ssp/auth/change-password' \
+ curl -k -w "\n%{http_code}\n" --location 'https://ssp.site-a.vcf.lab/ssp/auth/change-password' \
 -H "Content-Type: application/json" \
 -u "$vPodUID:$tmpPW" \
 -d "{
