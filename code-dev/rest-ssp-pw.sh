@@ -22,19 +22,19 @@ echo "Setting TMP password on SSP"
 curl -k --location "https://ssp.site-a.vcf.lab/ssp/auth/change-password" \
 --header "Content-Type: application/json" \
 --header "Authorization: Basic ${vPodTOKEN}" \
---data "{
-    'username': ${vPodUID},
-    'old_password': ${vPodPW},
-    'password': ${tmpPW}
-}"
+--data '{
+    "username": "'"${vPodUID}"'",
+    "old_password": "'"${vPodPW}"'",
+    "password": "'"${tmpPW}"'"
+}'
 
 echo "Setting Lab password on SSP"
 # Step 2- change back to same password with extension of 180days:
  curl -k --location "https://ssp.site-a.vcf.lab/ssp/auth/change-password" \
 --header "Content-Type: application/json" \
 --header "Authorization: Basic ${tmpTOKEN}" \
---data "{
-   'username': ${vPodUID},
-    'old_password': ${tmpPW},
-    'password': ${vPodPW}
-}"
+--data '{
+   "username": "'"${vPodUID}"'",
+    "old_password": "'"${tmpPW}"'",
+    "password": "'"${vPodPW}"'"
+}'
