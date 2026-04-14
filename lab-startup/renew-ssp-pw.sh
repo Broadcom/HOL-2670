@@ -7,7 +7,8 @@
 
 vPodUID="admin"
 vPodPW=$(</home/holuser/creds.txt) 
-tmpPW=pwgen -y 16 2
+tmpPW=tr -dc 'A-Za-z0-9!#$@' < /dev/urandom | head -c 16; echo
+tmpPW+="!"
 
 vPodTOKEN=$(echo -n "${vPodUID}:${vPodPW}" | base64)
 tmpTOKEN=$(echo -n "${vPodUID}:${tmpPW}" | base64)
