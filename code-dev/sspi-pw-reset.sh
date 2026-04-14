@@ -19,7 +19,7 @@ echo $tmpTOKEN
 
 echo "Setting TMP password on SSPi"
 # Step 3 - Change SSPI to have a temporary Password
-curl -k 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
+curl -k -w "\n%{http_code}\n" --location 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic "'"${tmpTOKEN}"'"' \
 --data '{
@@ -30,7 +30,7 @@ curl -k 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
 
 echo "Setting Lab password on SSPi"
 # Step 4 - Chage SSPI to have the Lab Password
-curl -k 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
+curl -k -w "\n%{http_code}\n" --location 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic "'"${tmpTOKEN}"'"' \
 --data '{
