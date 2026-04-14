@@ -36,7 +36,7 @@ curl -k --location 'https://ssp.site-a.vcf.lab/ssp/auth/change-password' \
 }"
 
 # Step 3 - Change SSPI to have a temporary Password
-curl -k --location 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
+curl -k 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
 --header 'Content-Type: application/json' \
 --header "Authorization: Basic ${tmpTOKEN}" \
 --data "{
@@ -46,7 +46,7 @@ curl -k --location 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
 }"
 
 # Step 4 - Chage SSPI to have the Lab Password
-curl -k --location 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
+curl -k 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
 --header 'Content-Type: application/json' \
 --header "Authorization: Basic ${tmpTOKEN}" \
 --data "{
