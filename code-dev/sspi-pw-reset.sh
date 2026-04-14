@@ -19,22 +19,22 @@ echo $tmpTOKEN
 
 echo "Setting TMP password on SSPi"
 # Step 3 - Change SSPI to have a temporary Password
-curl -k "https://ssp-i.site-a.vcf.lab/sspi/operations/accounts" \
---header "Content-Type: application/json" \
---header "Authorization: Basic ${tmpTOKEN}" \
---data "{
-    'username': ${vPodUID},
-    'old_password': ${vPodPW},
-    'password': ${tmpPW}
-}"
+curl -k 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic "'"${tmpTOKEN}"'"' \
+--data '{
+    'username': "'"${vPodUID}"'",
+    'old_password': "'"${vPodPW}"'",
+    'password': "'"${tmpPW}"'"
+}'
 
 echo "Setting Lab password on SSPi"
 # Step 4 - Chage SSPI to have the Lab Password
-curl -k "https://ssp-i.site-a.vcf.lab/sspi/operations/accounts" \
---header "Content-Type: application/json" \
---header "Authorization: Basic ${tmpTOKEN}" \
---data "{
-    'username': ${vPodUID},
-    'old_password': ${tmpPW},
-    'password': ${vPodPW}
-}"
+curl -k 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic "'"${tmpTOKEN}"'"' \
+--data '{
+    'username': "'"${vPodUID}"'",
+    'old_password': "'"${tmpPW}"'",
+    'password': "'"${vPodPW}"'"
+}'
