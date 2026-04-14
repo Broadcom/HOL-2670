@@ -17,6 +17,7 @@ echo $tmpPW
 echo $vPodTOKEN
 echo $tmpTOKEN
 
+echo "Setting TMP password on SSP"
 # Step 1- Change to temporary pass:
 curl -k --location "https://ssp.site-a.vcf.lab/ssp/auth/change-password" \
 --header "Content-Type: application/json" \
@@ -27,9 +28,10 @@ curl -k --location "https://ssp.site-a.vcf.lab/ssp/auth/change-password" \
     'password': ${tmpPW}
 }"
 
+echo "Setting Lab password on SSP"
 # Step 2- change back to same password with extension of 180days:
  curl -k --location "https://ssp.site-a.vcf.lab/ssp/auth/change-password" \
---header "'Content-Type: application/json"" \
+--header "Content-Type: application/json" \
 --header "Authorization: Basic ${tmpTOKEN}" \
 --data "{
     'username': ${vPodUID},
@@ -37,6 +39,7 @@ curl -k --location "https://ssp.site-a.vcf.lab/ssp/auth/change-password" \
     'password': ${vPodPW}
 }"
 
+echo "Setting TMP password on SSPi"
 # Step 3 - Change SSPI to have a temporary Password
 curl -k "https://ssp-i.site-a.vcf.lab/sspi/operations/accounts" \
 --header "Content-Type: application/json" \
@@ -47,6 +50,7 @@ curl -k "https://ssp-i.site-a.vcf.lab/sspi/operations/accounts" \
     'password': ${tmpPW}
 }"
 
+echo "Setting Lab password on SSPi"
 # Step 4 - Chage SSPI to have the Lab Password
 curl -k "https://ssp-i.site-a.vcf.lab/sspi/operations/accounts" \
 --header "Content-Type: application/json" \
