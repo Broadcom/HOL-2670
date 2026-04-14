@@ -23,9 +23,9 @@ curl -k --location "https://ssp.site-a.vcf.lab/ssp/auth/change-password" \
 --header "Content-Type: application/json" \
 --header "Authorization: Basic ${vPodTOKEN}" \
 --data "{
-    'username': ${vPodUID},
-    'old_password': ${vPodPW},
-    'password': ${tmpPW}
+    username: ${vPodUID},
+    old_password: ${vPodPW},
+    password: ${tmpPW}
 }"
 
 echo "Setting Lab password on SSP"
@@ -34,7 +34,7 @@ echo "Setting Lab password on SSP"
 --header "Content-Type: application/json" \
 --header "Authorization: Basic ${tmpTOKEN}" \
 --data "{
-    'username': ${vPodUID},
-    'old_password': ${tmpPW},
-    'password': ${vPodPW}
+    username: ${vPodUID},
+    old_password: ${tmpPW},
+    password: ${vPodPW}
 }"
