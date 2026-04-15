@@ -10,10 +10,10 @@ tmpPW+="!"
 
 echo $tmpPW
 
-sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "echo "$vPodPW\n$tmpPW\n$tmpPW\n | sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
+printf "$vPodPW\n$tmpPW\n$tmpPW\n" | sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
 
 echo "\nPassword set to the temporary Password listed above\n"
 
 sleep 1m
 
-sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "echo "$vPodPW\n$vPodPW\n$vPodPW\n | sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
+printf "$vPodPW\n$vPodPW\n$vPodPW\n" | sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
