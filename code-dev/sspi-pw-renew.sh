@@ -11,24 +11,20 @@ tmpPW+="!"
 
 echo $tmpPW
 
-#sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "echo $tmpPW | echo $tmpPW | echo $vPodPW | sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
-spawn sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "echo $vPodPW | sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
-expect "New password:"
-respond "$tmpPW"
-expect "Retype new password:"
-respond "$tmpPW"
-interact
-
+sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab <<EOF
+"sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
+"$vPodPW"
+"$tmpPW"
+"$tmpPW"
+EOF
 
 echo "\nPassword set to the temporary Password listed above\n"
 
 sleep 1m
 
-#sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "echo $vPodPW | echo $vPodPW | echo $vPodPW | sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
-
-spawn sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "echo $vPodPW | sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
-expect "New password:"
-respond "$vPodPW"
-expect "Retype new password:"
-respond "$vPodPW"
-interact
+sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab <<EOF
+"sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
+"$vPodPW"
+"$vPodPW"
+"$vPodPW"
+EOF
