@@ -27,15 +27,8 @@ curl -k -w "\n%{http_code}\n" --location 'https://ssp.site-a.vcf.lab/ssp/auth/ch
 }"
 
 echo "Setting TMP password on SSPi"
-# Step 3 - Change SSPI to have a temporary Password
-curl -k -w "\n%{http_code}\n" --location --request POST 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
--H "Content-Type: application/json" \
--u "$vPodUID:$vPodPW" \
--d "{
-    \"account_name\": \"$vPodUID\",
-    \"current_password\": \"$vPodPW\",
-    \"new_password\": \"$tmpPW\"
-}"
+printf "$vPodPW\n$tmpPW\n$tmpPW\n" | sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
+echo "Password set to the temporary password listed above"
 
 sleep 2m
 
@@ -51,12 +44,5 @@ echo "Setting Lab password on SSP"
 }"
 
 echo "Setting Lab password on SSPi"
-# Step 4 - Chage SSPI to have the Lab Password
-curl -k -w "\n%{http_code}\n" --location --request POST 'https://ssp-i.site-a.vcf.lab/sspi/operations/accounts' \
--H "Content-Type: application/json" \
--u "$vPodUID:$tmpPW" \
--d "{
-    \"account_name\": \"$vPodUID\",
-    \"current_password\": \"$tmpPW\",
-    \"new_password\": \"$vPodPW\"
-}"
+printf "$vPodPW\n$vPodPW\n$vPodPW\n" | sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "sudo -S /opt/vmware/vsx-operator/bin/reset_user_cred.py -u 'admin'"
+echo "Password set to the Lab default password"
