@@ -25,3 +25,6 @@ ansible-playbook /vpodrepo/2026-labs/2670/lab-startup/tag-ssp-vms.yml | tee -a /
 
 #Execute the final updates
 #/bin/bash /vpodrepo/2026-labs/2670/lab-startup/final-updates.sh | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
+
+#Refresh Passwords on SSP and SSPI
+/bin/bash /vpodrepo/2026-labs/2670/lab-startup/renew-ssp-pw.sh | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
