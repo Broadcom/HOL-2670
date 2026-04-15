@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/usr/bin/expect -f
 
 #Every 180 the admin password for SSPI will expire and will need to be renewed.
 #This script will reset the timer for the expired SSPI admin passwored in Production HOL Evironment.
