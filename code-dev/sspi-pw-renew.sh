@@ -16,7 +16,7 @@ spawn sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "echo $vPodPW | su
 expect "New password:"
 respond "$tmpPW"
 expect "Retype new password:"
-respond "$tmpPW
+respond "$tmpPW"
 interact
 
 
@@ -30,5 +30,5 @@ spawn sshpass -p $vPodPW ssh -t sysadmin@ssp-i.site-a.vcf.lab "echo $vPodPW | su
 expect "New password:"
 respond "$vPodPW"
 expect "Retype new password:"
-respond "$vPodPW
+respond "$vPodPW"
 interact
