@@ -6,4 +6,4 @@
 
 vPodPW=$(</home/holuser/creds.txt) 
 
-sshpass -p $vPodPW ssh admin@ssp-i.site-a.vcf.lab '/opt/vmware/vsx-operator/bin/reset_user_cred.py -u "admin"'
+sshpass -p $vPodPW ssh sysadmin@ssp-i.site-a.vcf.lab '/opt/vmware/vsx-operator/bin/reset_user_cred.py -u "admin"'
