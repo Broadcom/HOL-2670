@@ -16,3 +16,6 @@
         - name: vDefend Group Configuration | Add valid Groups
           include_tasks:
             file: ./group-restore.yml
+        - name: Updated T0 config | Add valid Groups
+          include_tasks:
+            file: ./update-t0-cofnig.yml
