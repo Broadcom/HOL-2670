@@ -30,7 +30,7 @@
       username: "{{ NSXT_CREDENTIALS.username }}"
       password: "{{ NSXT_CREDENTIALS.password }}"
       validate_certs: False
-      license_key: M04Z4-ZD347-19KN0-LCL8P-09VJV
+      license_key: M04Z4-ZD347-18KN0-LCL8P-09VJV
       state: "absent"
 
   - name: remove expired NSX License from WLD01
@@ -39,5 +39,5 @@
       username: "{{ NSXT_CREDENTIALS.username }}"
       password: "{{ NSXT_CREDENTIALS.password }}"
       validate_certs: False
-      license_key: M04Z4-ZD347-19KN0-LCL8P-09VJV
+      license_key: M04Z4-ZD347-18KN0-LCL8P-09VJV
       state: "absent"
