@@ -28,3 +28,6 @@ ansible-playbook /vpodrepo/2026-labs/2670/lab-startup/tag-ssp-vms.yml | tee -a /
 
 #Refresh Passwords on SSP and SSPI
 /bin/bash /vpodrepo/2026-labs/2670/lab-startup/renew-ssp-pw.sh | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1
+
+#Update Update the Expired Licenses on the NSX Managers in both MGMT and WLDO1
+ansible-playbook /vpodrepo/2026-labs/2670/lab-startup/update-nsx-license.yml | tee -a /lmchol/hol/labstartup.log >> /home/holuser/hol/labstartup.log 2>&1

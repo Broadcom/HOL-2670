@@ -1,0 +1,43 @@
+- hosts: localhost
+  connection: local
+  collections:
+    - vmware.ansible_for_nsxt
+  
+  tasks:
+  - include_vars: NSXT_Variables.yml
+
+  - name: add new NSX License to MGMT
+    vmware.ansible_for_nsxt.nsxt_licenses:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      license_key: 4H63X-VDK1M-N8CN0-L2V00-2H20J
+      state: "present"
+  
+  - name: add new NSX License to WLD01
+    vmware.ansible_for_nsxt.nsxt_licenses:
+      hostname: "{{ NSXT_CREDENTIALS.wld_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      license_key: 4H63X-VDK1M-N8CN0-L2V00-2H20J
+      state: "present"
+  
+  - name: remove expired NSX License from MGMT
+    vmware.ansible_for_nsxt.nsxt_licenses:
+      hostname: "{{ NSXT_CREDENTIALS.mgmt_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      license_key: M04Z4-ZD347-19KN0-LCL8P-09VJV
+      state: "absent"
+
+  - name: remove expired NSX License from WLD01
+    vmware.ansible_for_nsxt.nsxt_licenses:
+      hostname: "{{ NSXT_CREDENTIALS.wld_node }}"
+      username: "{{ NSXT_CREDENTIALS.username }}"
+      password: "{{ NSXT_CREDENTIALS.password }}"
+      validate_certs: False
+      license_key: M04Z4-ZD347-19KN0-LCL8P-09VJV
+      state: "absent"
